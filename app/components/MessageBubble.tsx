@@ -5,14 +5,22 @@ import type { ChatMessage, MessagePart } from "../types";
 import { AdPreviewBubble } from "./AdPreviewBubble";
 import { BrandDNACard } from "./BrandDNACard";
 import { TemplateGallery } from "./TemplateGallery";
+import { ImagePicker } from "./ImagePicker";
 
 interface Props {
   message: ChatMessage;
   onRegenerate?: (msgId: string) => void;
   sendMessage?: (text: string) => void;
+  onImagesSelected?: (images: { data: string; mimeType: string }[]) => void;
 }
 
-function renderPart(part: MessagePart, msgId: string, onRegenerate?: (msgId: string) => void, sendMessage?: (text: string) => void) {
+function renderPart(
+  part: MessagePart,
+  msgId: string,
+  onRegenerate?: (msgId: string) => void,
+  sendMessage?: (text: string) => void,
+  onImagesSelected?: (images: { data: string; mimeType: string }[]) => void,
+) {
   switch (part.type) {
     case "text":
       return (
@@ -38,15 +46,27 @@ function renderPart(part: MessagePart, msgId: string, onRegenerate?: (msgId: str
       return null;
 
     case "template_gallery":
-      // Make sure we have the fallback if undefined
       return <TemplateGallery key="template-gallery" sendMessage={sendMessage || (() => {})} />;
+
+    case "scraped_images":
+      return (
+        <ImagePicker
+          key="image-picker"
+          images={part.images}
+          onConfirm={(selected) => {
+            if (onImagesSelected) {
+              onImagesSelected(selected);
+            }
+          }}
+        />
+      );
 
     default:
       return null;
   }
 }
 
-export function MessageBubble({ message, onRegenerate, sendMessage }: Props) {
+export function MessageBubble({ message, onRegenerate, sendMessage, onImagesSelected }: Props) {
   const isUser = message.role === "user";
 
   if (isUser) {
@@ -95,7 +115,7 @@ export function MessageBubble({ message, onRegenerate, sendMessage }: Props) {
       <div className="flex flex-col gap-3 min-w-0 flex-1">
         {message.parts && message.parts.length > 0 ? (
           message.parts.map((part, i) => (
-            <div key={i}>{renderPart(part, message.id, onRegenerate, sendMessage)}</div>
+            <div key={i}>{renderPart(part, message.id, onRegenerate, sendMessage, onImagesSelected)}</div>
           ))
         ) : (
           <div className="prose prose-invert prose-sm max-w-none text-[14px] leading-relaxed">

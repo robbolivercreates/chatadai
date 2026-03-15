@@ -736,6 +736,7 @@ export async function POST(req: NextRequest) {
     }
 
     // ── URL Detection: fetch page content + product images for brand analysis ──
+    let scrapedImagesForResponse: { data: string; mimeType: string; url: string }[] = [];
     const urls = extractUrls(lastMessage.content);
     if (urls.length > 0) {
       const fetchResults = await Promise.all(
@@ -767,6 +768,15 @@ export async function POST(req: NextRequest) {
         }
 
         textContent += "\n\n[SYSTEM: The following website content was fetched for brand analysis. Product images from the page have been attached above — ANALYZE THEM VISUALLY to extract the real brand colors, packaging design, product appearance, and visual identity. Use BOTH the visual analysis AND the text data below to build an accurate Brand DNA. Do NOT guess colors — extract them from the actual product images.]\n\n" + validResults.map((r) => r.text).join("\n\n---\n\n");
+
+        // Store downloaded images to include in API response for user selection
+        if (validImages && validImages.length > 0) {
+          scrapedImagesForResponse = validImages.map((img, i) => ({
+            data: img.data,
+            mimeType: img.mimeType,
+            url: uniqueImageUrls[i] || "",
+          }));
+        }
       } else {
         textContent += "\n\n[SYSTEM: URL fetch failed. Tell the user you couldn't read their website and transition to Path A — ask them manually about their brand, starting with colors.]";
       }
@@ -782,6 +792,14 @@ export async function POST(req: NextRequest) {
     console.log("[AdForge] Raw agent response (first 500 chars):", responseText.slice(0, 500));
 
     const { parts, generateAdRequest } = parseAgentResponse(responseText);
+
+    // If we scraped product images, inject them as a part for the frontend image picker
+    if (scrapedImagesForResponse.length > 0) {
+      parts.push({
+        type: "scraped_images",
+        images: scrapedImagesForResponse,
+      });
+    }
 
     // If the agent requested ad generation, assemble prompt server-side and generate
     if (generateAdRequest) {

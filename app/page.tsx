@@ -433,7 +433,21 @@ export default function Home() {
           <>
             <div className="flex-1 overflow-y-auto dark-scrollbar py-6 flex flex-col gap-1">
               {messages.map((msg) => (
-                <MessageBubble key={msg.id} message={msg} sendMessage={sendMessage} />
+                <MessageBubble
+                  key={msg.id}
+                  message={msg}
+                  sendMessage={sendMessage}
+                  onImagesSelected={(selectedImages) => {
+                    // Store selected product images for ad generation
+                    const asUploaded = selectedImages.map((img) => ({
+                      data: img.data,
+                      mimeType: img.mimeType,
+                      preview: `data:${img.mimeType};base64,${img.data.slice(0, 100)}`,
+                    }));
+                    productImagesRef.current = asUploaded;
+                    sendMessage(`I've selected ${selectedImages.length} product image${selectedImages.length > 1 ? "s" : ""} to use for my ads.`);
+                  }}
+                />
               ))}
 
               {/* Loading indicator */}

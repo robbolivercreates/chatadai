@@ -23,11 +23,17 @@ export type MessagePart =
   | AdPreviewPart
   | FormatSelectorPart
   | TemplateGalleryPart
-  | ImageUploadPromptPart;
+  | ImageUploadPromptPart
+  | ScrapedImagesPart;
 
 export interface TextPart {
   type: "text";
   content: string;
+}
+
+export interface ScrapedImagesPart {
+  type: "scraped_images";
+  images: { data: string; mimeType: string; url: string }[];
 }
 
 export interface BrandDNAPart {
