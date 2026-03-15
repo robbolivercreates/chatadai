@@ -382,7 +382,7 @@ image generation prompt. Without it, ads will look generic and off-brand.`;
 
   // Layer 4 — Template library (loaded from TEMPLATES.md with variable details)
   try {
-    prompt += "\n\n" + getTemplateReference();
+    prompt += "\n\n" + getTemplateReference(language);
   } catch {
     prompt += "\n\n[Templates could not be loaded]";
   }

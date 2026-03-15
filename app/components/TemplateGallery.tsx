@@ -41,17 +41,23 @@ export function TemplateGallery({ sendMessage }: { sendMessage: (text: string) =
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/templates")
-      .then((res) => res.json())
-      .then((data: Template[]) => {
+    async function fetchTemplates() {
+      try {
+        setLoading(true);
+        const res = await fetch(`/api/templates?lang=${language}`);
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        const data: Template[] = await res.json();
         setTemplates(data);
-        setLoading(false);
-      })
-      .catch((err) => {
+      } catch (err) {
         console.error("Failed to load templates", err);
+      } finally {
         setLoading(false);
-      });
-  }, []);
+      }
+    }
+    fetchTemplates();
+  }, [language]);
 
   if (loading) {
     return (
@@ -112,11 +118,11 @@ export function TemplateGallery({ sendMessage }: { sendMessage: (text: string) =
             </div>
 
             <h3 className="text-[15px] font-semibold text-white/90 leading-snug mb-2 group-hover:text-white transition-colors line-clamp-2">
-              {language === "pt" && template.name_pt ? template.name_pt : template.name}
+              {template.name}
             </h3>
             
             <p className="text-xs text-white/50 leading-relaxed line-clamp-3 mt-auto">
-              {language === "pt" && template.strategyNote_pt ? template.strategyNote_pt : template.strategyNote}
+              {template.strategyNote}
             </p>
           </div>
         ))}

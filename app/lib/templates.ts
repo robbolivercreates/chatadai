@@ -22,21 +22,24 @@ export interface TemplateData {
 }
 
 // ─── Singleton cache ─────────────────────────────────────────────
-let _cache: Map<number, TemplateData> | null = null;
+const _cache = new Map<string, Map<number, TemplateData>>();
 
 /**
- * Parse TEMPLATES.md and return a Map<id, TemplateData>.
- * Results are cached after first load.
+ * Parse TEMPLATES_{lang}.md and return a Map<id, TemplateData>.
+ * Results are cached after first load per language.
  */
-export function loadTemplates(): Map<number, TemplateData> {
-  if (_cache) return _cache;
+export function loadTemplates(language: "en" | "pt" = "en"): Map<number, TemplateData> {
+  const cacheKey = language;
+  if (_cache.has(cacheKey)) return _cache.get(cacheKey)!;
 
-  const filePath = path.join(process.cwd(), "TEMPLATES.md");
+  const fileName = language === "pt" ? "TEMPLATES_PT.md" : "TEMPLATES_EN.md";
+  const filePath = path.join(process.cwd(), fileName);
 
   if (!fs.existsSync(filePath)) {
-    console.error("[Templates] TEMPLATES.md not found at", filePath);
-    _cache = new Map();
-    return _cache;
+    console.error(`[Templates] ${fileName} not found at`, filePath);
+    const emptyMap = new Map();
+    _cache.set(cacheKey, emptyMap);
+    return emptyMap;
   }
 
   const raw = fs.readFileSync(filePath, "utf-8");
@@ -102,8 +105,8 @@ export function loadTemplates(): Map<number, TemplateData> {
     });
   }
 
-  console.log(`[Templates] Loaded ${templates.size} templates from TEMPLATES.md`);
-  _cache = templates;
+  console.log(`[Templates] Loaded ${templates.size} templates from ${fileName}`);
+  _cache.set(cacheKey, templates);
   return templates;
 }
 
@@ -156,8 +159,8 @@ export function fillTemplatePrompt(
  * Build the compressed template reference for the system prompt.
  * Includes variable info for each template so the agent knows what to collect.
  */
-export function getTemplateReference(): string {
-  const templates = loadTemplates();
+export function getTemplateReference(language: "en" | "pt" = "en"): string {
+  const templates = loadTemplates(language);
   const lines: string[] = ["AVAILABLE TEMPLATES (with variable details):\n"];
 
   let currentCategory = "";
