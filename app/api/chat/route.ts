@@ -764,19 +764,17 @@ export async function POST(req: NextRequest) {
                 inlineData: { data: img.data, mimeType: img.mimeType },
               });
             });
+
+            // Store downloaded images to include in API response for user selection
+            scrapedImagesForResponse = validImages.map((img, i) => ({
+              data: img.data,
+              mimeType: img.mimeType,
+              url: uniqueImageUrls[i] || "",
+            }));
           }
         }
 
         textContent += "\n\n[SYSTEM: The following website content was fetched for brand analysis. Product images from the page have been attached above — ANALYZE THEM VISUALLY to extract the real brand colors, packaging design, product appearance, and visual identity. Use BOTH the visual analysis AND the text data below to build an accurate Brand DNA. Do NOT guess colors — extract them from the actual product images.]\n\n" + validResults.map((r) => r.text).join("\n\n---\n\n");
-
-        // Store downloaded images to include in API response for user selection
-        if (validImages && validImages.length > 0) {
-          scrapedImagesForResponse = validImages.map((img, i) => ({
-            data: img.data,
-            mimeType: img.mimeType,
-            url: uniqueImageUrls[i] || "",
-          }));
-        }
       } else {
         textContent += "\n\n[SYSTEM: URL fetch failed. Tell the user you couldn't read their website and transition to Path A — ask them manually about their brand, starting with colors.]";
       }
