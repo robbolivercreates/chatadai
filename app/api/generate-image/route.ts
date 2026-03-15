@@ -40,11 +40,21 @@ export async function POST(req: NextRequest) {
 
     parts.push({ text: prompt });
 
+    // Map format to aspect ratio
+    const formatToAspect: Record<string, string> = {
+      "4:5": "4:5", "9:16": "9:16", "1:1": "1:1", "16:9": "16:9",
+    };
+    const aspectRatio = formatToAspect[format] || "4:5";
+
     const result = await model.generateContent({
       contents: [{ role: "user", parts }],
       generationConfig: {
         // @ts-expect-error — responseModalities is a valid field for image-capable models
         responseModalities: ["TEXT", "IMAGE"],
+        imageConfig: {
+          imageSize: "1K",
+          aspectRatio,
+        },
       },
     });
 

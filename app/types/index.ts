@@ -22,7 +22,7 @@ export type MessagePart =
   | BrandDNAPart
   | AdPreviewPart
   | FormatSelectorPart
-  | TemplateSelectorPart
+  | TemplateGalleryPart
   | ImageUploadPromptPart;
 
 export interface TextPart {
@@ -36,10 +36,16 @@ export interface BrandDNAPart {
   productName: string;
   primaryColor: string;
   secondaryColor: string;
+  accentColor: string;
+  typographyStyle: string;
   toneAdjectives: string[];
   targetAudience: string;
   positioning: string;
   keyBenefits: string[];
+  imageGenerationModifier: string;
+  website: string;
+  socialHandle: string;
+  source: "manual" | "url_scrape";
 }
 
 export interface AdPreviewPart {
@@ -56,9 +62,8 @@ export interface FormatSelectorPart {
   question: string;
 }
 
-export interface TemplateSelectorPart {
-  type: "template_selector";
-  categories: TemplateCategory[];
+export interface TemplateGalleryPart {
+  type: "template_gallery";
 }
 
 export interface ImageUploadPromptPart {
@@ -90,6 +95,8 @@ export interface BrandDNA {
   key_benefits: string[];
   product_image_uris?: string[];
   image_generation_modifier: string;
+  website?: string;
+  social_handle?: string;
   source: "manual" | "url_scrape";
   created_at: string;
 }

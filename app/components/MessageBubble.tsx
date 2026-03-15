@@ -4,13 +4,15 @@ import ReactMarkdown from "react-markdown";
 import type { ChatMessage, MessagePart } from "../types";
 import { AdPreviewBubble } from "./AdPreviewBubble";
 import { BrandDNACard } from "./BrandDNACard";
+import { TemplateGallery } from "./TemplateGallery";
 
 interface Props {
   message: ChatMessage;
   onRegenerate?: (msgId: string) => void;
+  sendMessage?: (text: string) => void;
 }
 
-function renderPart(part: MessagePart, msgId: string, onRegenerate?: (msgId: string) => void) {
+function renderPart(part: MessagePart, msgId: string, onRegenerate?: (msgId: string) => void, sendMessage?: (text: string) => void) {
   switch (part.type) {
     case "text":
       return (
@@ -35,12 +37,16 @@ function renderPart(part: MessagePart, msgId: string, onRegenerate?: (msgId: str
       // Rendered by parent page (needs state)
       return null;
 
+    case "template_gallery":
+      // Make sure we have the fallback if undefined
+      return <TemplateGallery key="template-gallery" sendMessage={sendMessage || (() => {})} />;
+
     default:
       return null;
   }
 }
 
-export function MessageBubble({ message, onRegenerate }: Props) {
+export function MessageBubble({ message, onRegenerate, sendMessage }: Props) {
   const isUser = message.role === "user";
 
   if (isUser) {
@@ -89,7 +95,7 @@ export function MessageBubble({ message, onRegenerate }: Props) {
       <div className="flex flex-col gap-3 min-w-0 flex-1">
         {message.parts && message.parts.length > 0 ? (
           message.parts.map((part, i) => (
-            <div key={i}>{renderPart(part, message.id, onRegenerate)}</div>
+            <div key={i}>{renderPart(part, message.id, onRegenerate, sendMessage)}</div>
           ))
         ) : (
           <div className="prose prose-invert prose-sm max-w-none text-[14px] leading-relaxed">

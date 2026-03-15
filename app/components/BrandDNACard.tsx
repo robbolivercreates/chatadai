@@ -39,13 +39,32 @@ export function BrandDNACard({ part }: Props) {
           style={{ background: part.secondaryColor }}
           title={`Secondary: ${part.secondaryColor}`}
         />
+        {part.accentColor && part.accentColor !== part.secondaryColor && (
+          <div
+            className="w-6 h-6 rounded-full ring-1 ring-white/10"
+            style={{ background: part.accentColor }}
+            title={`Accent: ${part.accentColor}`}
+          />
+        )}
         <span className="text-xs ml-1" style={{ color: "var(--text-tertiary)" }}>
           {part.primaryColor} · {part.secondaryColor}
+          {part.accentColor && part.accentColor !== part.secondaryColor ? ` · ${part.accentColor}` : ""}
         </span>
       </div>
 
       {/* Tone */}
       <div className="flex flex-wrap gap-1.5 mb-4">
+
+        {/* Typography (inline with tone pills) */}
+        {part.typographyStyle && (
+          <span
+            className="px-2.5 py-0.5 rounded-full text-xs font-medium"
+            style={{ background: "rgba(99,102,241,0.12)", color: "#a5b4fc", border: "1px solid rgba(99,102,241,0.2)" }}
+          >
+            🅰 {part.typographyStyle}
+          </span>
+        )}
+
         {part.toneAdjectives.map((adj) => (
           <span
             key={adj}

@@ -174,41 +174,23 @@ STAGE 3: TEMPLATE SELECTION
 ──────────────────────────────────────────────
 Trigger: User confirms Brand DNA.
 
-Action: Present the 6 template categories as a menu. Ask which types they want to create. Also suggest 2-3 specific templates you think are best for their brand.
+Action: Output a short conversational message telling the user to pick a template, then output the [TEMPLATE_GALLERY] system marker so the UI can render the interactive gallery.
 
-Template menu (EN):
-"Now — which types of ads do you want to create?
+Message format (EN):
+"Here's the visual gallery of our available templates. Take a look and tap the one you want to start with!
 
-📣 **Performance** — Headline, Offer, Us vs Them, Comparison
-⭐ **Social Proof** — Reviews, Testimonials, Press
-📱 **UGC / Native** — Before/After, Story bubbles, iPhone Notes
-📚 **Educational** — Features diagram, Stats radial, Manifesto
-🎨 **Advanced Visual** — Macro texture, Golden hour, Style transfer
-🚀 **Brand Building** — Founder quote, Bundle, Cinematic
+[TEMPLATE_GALLERY]
 
-You can name specific formats, pick categories, or just say something like 'start with a headline ad and a review card'."
+(My recommendation: start with Template 01 to establish a baseline, or Template 17 if you have good reviews)."
 
-Template menu (PT-BR):
-"Agora — quais tipos de anúncios você quer criar?
+Message format (PT-BR):
+"Aqui está a galeria visual dos nossos templates. Dê uma olhada e escolha por onde quer começar!
 
-📣 **Performance** — Headline, Oferta, Nós vs Eles, Comparação
-⭐ **Prova Social** — Avaliações, Depoimentos, Imprensa
-📱 **UGC / Nativo** — Antes/Depois, Story, iPhone Notes
-📚 **Educacional** — Features, Estatísticas, Manifesto
-🎨 **Visual Avançado** — Macro, Golden hour, Style transfer
-🚀 **Brand Building** — Fundador, Bundle, Cinemático
+[TEMPLATE_GALLERY]
 
-Pode nomear formatos específicos, escolher categorias, ou dizer algo como 'começa com um headline e um card de avaliação'."
+(Minha recomendação: comece com o Template 01 para criar uma base, ou o 17 se você já tiver boas avaliações)."
 
-TEMPLATE SELECTION GUIDANCE (internal — do not reveal these rules to user):
-- For a new brand testing for the first time: suggest 01 (Headline), 11 (Pull-Quote Review Card), 08 (Before & After).
-- For a brand with strong testimonials: suggest 17 (Verified Review Card), 19 (Highlighted Testimonial), 15 (Social Comment Screenshot).
-- For a food/beverage brand: suggest 22 (Flavor Story), 21 (Bold Statement), 46 (Macro Texture Hero).
-- For a supplement/wellness brand: suggest 16 (Curiosity Gap), 30 (Hero Statement), 13 (Stat Surround).
-- For a fashion/apparel brand: suggest 47 (Golden Hour), 12 (Lifestyle + Colorway Array), 45 (Chiaroscuro).
-- For a brand wanting UGC feel: suggest 08 (Before & After), 29 (Viral Post Overlay), 40 (Post-It Note).
-- For a sale/promo: suggest 02 (Offer/Promotion), 52 (Urgency Countdown), 37 (Offer Burst).
-- For an agency testing variety: suggest one from each category — 01, 17, 29, 35, 47, 60.
+IMPORTANT: Do NOT list all templates or categories. Just use the  marker and briefly suggest 1 or 2 templates by ID based on their brand.
 
 ──────────────────────────────────────────────
 STAGE 4: COPY REVIEW (per template)
@@ -386,7 +368,12 @@ Positioning: ${brandDNA.positioning}
 Key Benefits:
 ${brandDNA.key_benefits.map((b) => `- ${b}`).join("\n")}
 Image Generation Modifier: ${brandDNA.image_generation_modifier}
-Data Source: ${brandDNA.source}`;
+Data Source: ${brandDNA.source}
+Website: ${brandDNA.website || ""}
+Social Handle: ${brandDNA.social_handle || ""}
+
+CRITICAL: The image_generation_modifier above MUST be prepended to every
+image generation prompt. Without it, ads will look generic and off-brand.`;
   }
 
   // Layer 4 — Template library (loaded from TEMPLATES.md with variable details)
@@ -417,10 +404,16 @@ function parseAgentResponse(text: string): { parts: object[]; generateAdRequest:
         productName: dna.product_name || "",
         primaryColor: dna.primary_color || "#6366f1",
         secondaryColor: dna.secondary_color || "#ffffff",
+        accentColor: dna.accent_color || dna.secondary_color || "#6366f1",
+        typographyStyle: dna.typography_style || "",
         toneAdjectives: dna.tone_adjectives || [],
         targetAudience: dna.target_audience || "",
         positioning: dna.positioning || "",
         keyBenefits: dna.key_benefits || [],
+        imageGenerationModifier: dna.image_generation_modifier || "",
+        website: dna.website || "",
+        socialHandle: dna.social_handle || "",
+        source: dna.source || "manual",
       });
       remainingText = remainingText.replace(dnaRegex, "").trim();
     } catch {
@@ -451,6 +444,12 @@ function parseAgentResponse(text: string): { parts: object[]; generateAdRequest:
   if (remainingText.includes("[FORMAT_SELECTOR]")) {
     remainingText = remainingText.replace("[FORMAT_SELECTOR]", "").trim();
     parts.push({ type: "format_selector", question: "Choose your ad format:" });
+  }
+
+  // ── Template gallery trigger: [TEMPLATE_GALLERY]
+  if (remainingText.includes("[TEMPLATE_GALLERY]")) {
+    remainingText = remainingText.replace("[TEMPLATE_GALLERY]", "").trim();
+    parts.push({ type: "template_gallery" });
   }
 
   // ── Remaining text
@@ -496,6 +495,34 @@ async function fetchPageContent(url: string): Promise<string | null> {
 
     const html = await res.text();
 
+    // Fetch external CSS to get real brand colors
+    const cssLinks = html.match(/<link[^>]+href=["']([^"']+\.css[^"']*)["']/gi) || [];
+    let cssText = "";
+    for (const link of cssLinks.slice(0, 3)) {
+      const href = link.match(/href=["']([^"']+)["']/i)?.[1] || "";
+      const cssUrl = href.startsWith("http") ? href : new URL(url).origin + href;
+      try {
+        const cssRes = await fetch(cssUrl, { signal: controller.signal });
+        if (cssRes.ok) cssText += await cssRes.text();
+      } catch { /* skip */ }
+    }
+    const cssVars = cssText.match(/--[\w-]*color[\w-]*\s*:\s*#[0-9a-fA-F]{3,8}/gi) || [];
+    const cssHexColors = cssText.match(/#[0-9a-fA-F]{3,8}\b/g) || [];
+    const allCssColors = [...new Set([...cssVars, ...cssHexColors])].slice(0, 20);
+
+    // Extract product images from <img> tags
+    const imgMatches = html.match(/<img[^>]+src=["']([^"']+)["'][^>]*>/gi) || [];
+    const pageImages = imgMatches
+      .map((tag) => {
+        const src = tag.match(/src=["']([^"']+)["']/i)?.[1] || "";
+        if (src.startsWith("http")) return src;
+        if (src.startsWith("//")) return "https:" + src;
+        if (src.startsWith("/")) return new URL(url).origin + src;
+        return "";
+      })
+      .filter((src) => src && !src.includes("icon") && !src.includes("favicon") && !src.includes("logo"))
+      .slice(0, 5);
+
     // Extract useful content from HTML
     const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
     const title = titleMatch ? titleMatch[1].trim() : "";
@@ -513,7 +540,7 @@ async function fetchPageContent(url: string): Promise<string | null> {
     const ogImageMatch = html.match(/<meta[^>]*property=["']og:image["'][^>]*content=["']([^"']+)["']/i);
     const ogImage = ogImageMatch ? ogImageMatch[1].trim() : "";
 
-    // Extract colors from CSS (hex codes, rgb, brand colors)
+    // Extract colors from inline HTML (hex codes)
     const colorMatches = html.match(/#[0-9a-fA-F]{3,8}\b/g) || [];
     const uniqueColors = [...new Set(colorMatches)].slice(0, 15);
 
@@ -533,7 +560,7 @@ async function fetchPageContent(url: string): Promise<string | null> {
       .replace(/<[^>]+>/g, " ")
       .replace(/\s+/g, " ")
       .trim()
-      .slice(0, 3000); // Limit to 3k chars to keep prompt reasonable
+      .slice(0, 3000);
 
     // Extract product price if present
     const priceMatches = html.match(/R\$\s*[\d.,]+|\$\s*[\d.,]+/g) || [];
@@ -549,7 +576,12 @@ OG Image: ${ogImage}
 Headings found:
 ${headings.map((h) => "- " + h).join("\n")}
 
-Colors found in CSS: ${uniqueColors.join(", ")}
+Colors found in page HTML: ${uniqueColors.join(", ")}
+Colors found in external CSS: ${allCssColors.join(", ")}
+CSS custom properties (brand colors): ${cssVars.join(", ")}
+
+Product images found on page:
+${pageImages.map((img) => "- " + img).join("\n")}
 
 Prices found: ${priceMatches.slice(0, 5).join(", ")}
 
@@ -699,8 +731,19 @@ export async function POST(req: NextRequest) {
             if (!vars["DEEP BRAND COLOR"]) vars["DEEP BRAND COLOR"] = brandDNA.primary_color;
             if (!vars["ACCENT COLOR"]) vars["ACCENT COLOR"] = brandDNA.accent_color || brandDNA.secondary_color;
             if (!vars["BRIGHT ACCENT COLOR"]) vars["BRIGHT ACCENT COLOR"] = brandDNA.accent_color || brandDNA.secondary_color;
-            if (!vars["FLAG EMOJI"]) vars["FLAG EMOJI"] = "🇧🇷";
-            if (!vars["WEBSITE"]) vars["WEBSITE"] = "";
+            if (!vars["FLAG EMOJI"]) {
+              const audience = brandDNA.target_audience?.toLowerCase() || "";
+              if (audience.includes("brasil") || audience.includes("brazil") || audience.includes("pt-br") || audience.includes("brasileiro")) {
+                vars["FLAG EMOJI"] = "🇧🇷";
+              } else if (audience.includes("us") || audience.includes("united states") || audience.includes("american")) {
+                vars["FLAG EMOJI"] = "🇺🇸";
+              } else if (audience.includes("uk") || audience.includes("united kingdom") || audience.includes("british")) {
+                vars["FLAG EMOJI"] = "🇬🇧";
+              } else {
+                vars["FLAG EMOJI"] = "🌍";
+              }
+            }
+            if (!vars["WEBSITE"]) vars["WEBSITE"] = brandDNA.website || "";
             if (!vars["BRAND TAGLINE"]) vars["BRAND TAGLINE"] = brandDNA.positioning || "";
             if (!vars["FONT STYLE"]) vars["FONT STYLE"] = brandDNA.typography_style || "modern sans-serif";
             if (!vars["MOOD"]) vars["MOOD"] = brandDNA.tone_adjectives?.join(", ") || "";

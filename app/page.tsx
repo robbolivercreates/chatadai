@@ -193,14 +193,16 @@ export default function Home() {
           product_name: dnaPart.productName,
           primary_color: dnaPart.primaryColor,
           secondary_color: dnaPart.secondaryColor,
-          accent_color: dnaPart.secondaryColor,
-          typography_style: "",
+          accent_color: dnaPart.accentColor,
+          typography_style: dnaPart.typographyStyle,
           tone_adjectives: dnaPart.toneAdjectives,
           target_audience: dnaPart.targetAudience,
           positioning: dnaPart.positioning,
           key_benefits: dnaPart.keyBenefits,
-          image_generation_modifier: "",
-          source: "manual",
+          image_generation_modifier: dnaPart.imageGenerationModifier,
+          website: dnaPart.website,
+          social_handle: dnaPart.socialHandle,
+          source: dnaPart.source,
           created_at: new Date().toISOString(),
         });
       }
@@ -431,7 +433,7 @@ export default function Home() {
           <>
             <div className="flex-1 overflow-y-auto dark-scrollbar py-6 flex flex-col gap-1">
               {messages.map((msg) => (
-                <MessageBubble key={msg.id} message={msg} />
+                <MessageBubble key={msg.id} message={msg} sendMessage={sendMessage} />
               ))}
 
               {/* Loading indicator */}
