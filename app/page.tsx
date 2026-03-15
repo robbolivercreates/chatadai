@@ -46,7 +46,7 @@ export default function Home() {
   const productImagesRef = useRef<UploadedImage[]>([]);
 
   const { sessions, activeChatId, createSession, setActiveSession, updateMessages, updateBrandDNA, deleteSession, getActiveSession } = useChatStore();
-  const { geminiApiKey } = useSettingsStore();
+  const { geminiApiKey, language } = useSettingsStore();
 
   const activeSession = getActiveSession();
 
@@ -160,6 +160,7 @@ export default function Home() {
       const body: Record<string, unknown> = {
         messages: apiMessages,
         apiKey: geminiApiKey,
+        language: language || "pt",
         selectedFormat: selectedFormat || "4:5",
       };
 

@@ -347,8 +347,12 @@ VARIABLE FILL TYPES (for your reference — do not reveal to user):
 - user_input: ask user conversationally before generating`;
 
 // ─── Build system prompt ─────────────────────────────────────────
-function buildSystemPrompt(brandDNA?: BrandDNA): string {
-  let prompt = LAYER_1_PERSONA + "\n\n" + LAYER_2_INSTRUCTIONS;
+function buildSystemPrompt(brandDNA?: BrandDNA, language: "pt" | "en" = "pt"): string {
+  const languageInstruction = language === "pt"
+    ? `\n\nLANGUAGE RULE: Always respond in Brazilian Portuguese. All text rendered inside generated ad images must also be in Portuguese — headlines, subheads, CTAs, and UI labels. Never use English text inside ad images.`
+    : `\n\nLANGUAGE RULE: Always respond in English. All text inside generated ad images must be in English.`;
+
+  let prompt = LAYER_1_PERSONA + languageInstruction + "\n\n" + LAYER_2_INSTRUCTIONS;
 
   // Layer 3 — Brand DNA context (if available)
   if (brandDNA) {
@@ -653,12 +657,13 @@ async function downloadImageAsBase64(imageUrl: string): Promise<{ data: string; 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { messages, apiKey, brandDNA, selectedFormat, images } = body as {
+    const { messages, apiKey, brandDNA, selectedFormat, images, language } = body as {
       messages: { role: string; content: string }[];
       apiKey: string;
       brandDNA?: BrandDNA;
       selectedFormat?: string;
       images?: { data: string; mimeType: string }[];
+      language?: "pt" | "en";
     };
 
     if (!apiKey) {
@@ -672,7 +677,7 @@ export async function POST(req: NextRequest) {
     const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({
       model: MODEL_CHAT_DEFAULT,
-      systemInstruction: buildSystemPrompt(brandDNA),
+      systemInstruction: buildSystemPrompt(brandDNA, language || "pt"),
       safetySettings: [
         { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_NONE },
         { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_NONE },
@@ -844,6 +849,16 @@ export async function POST(req: NextRequest) {
             if (!vars["MOOD"]) vars["MOOD"] = brandDNA.tone_adjectives?.join(", ") || "";
             if (!vars["BACKGROUND"]) vars["BACKGROUND"] = brandDNA.primary_color;
           }
+
+          // UI Auto-fill variables based on Language
+          const isPortuguese = (language || "pt") === "pt";
+          vars["AS FEATURED IN TEXT"]    = isPortuguese ? "Como Visto Em"        : "As Featured In";
+          vars["VERIFIED BADGE TEXT"]    = isPortuguese ? "Comprador Verificado" : "Verified Buyer";
+          vars["VERIFIED PURCHASE TEXT"] = isPortuguese ? "Compra Verificada"    : "Verified Purchase";
+          vars["READ MORE TEXT"]         = isPortuguese ? "...Ler mais"          : "...Read more";
+          vars["HELPFUL TEXT"]           = isPortuguese ? "Isso foi útil?"       : "Was this review helpful?";
+          vars["SECTION LABEL"]          = isPortuguese ? "Últimas Notícias"     : "Latest Headlines";
+          vars["RATED TEXT"]             = isPortuguese ? "Avaliado"             : "Rated";
 
           fullPrompt = fillTemplatePrompt(template, vars, adReq.format || "4:5");
           console.log("[AdForge] ✅ Assembled prompt from template", adReq.templateId, "(", template.name, ")");
