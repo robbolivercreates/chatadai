@@ -38,7 +38,9 @@
 id: 1
 category: A
 name: Headline
+name_pt: "Cópia Curta / Título"
 strategy_note: Tests text rendering. If this comes back clean, the model handles copy. The simplest and most versatile performance template — start here for any new brand.
+strategy_note_pt: "Testa a renderização do texto. O modelo domina a cópia se a saída for limpa. Simples e versátil: o ponto de partida para qualquer marca."
 formats: [4:5, 1:1]
 recommended_format: 4:5
 variables:
@@ -74,7 +76,9 @@ Use the attached images as brand reference. Match the exact product colors, typo
 id: 2
 category: A
 name: Offer / Promotion
+name_pt: "Oferta / Promoção Direta"
 strategy_note: The money-maker. Test your core offer. Use whenever there is a discount, free trial, bundle deal, or limited-time promotion to push.
+strategy_note_pt: "A máquina de vendas. Teste sua oferta principal. Perfeito para descontos, testes grátis, pacotes ou ações por tempo limitado."
 formats: [9:16, 4:5]
 recommended_format: 9:16
 variables:
@@ -113,7 +117,9 @@ Use the attached images as brand reference. Match exact brand colors and typogra
 id: 3
 category: A
 name: Testimonial
+name_pt: "Depoimento Autoridade"
 strategy_note: Real environments and text overlays. Tests composition depth. Use when you have strong customer quotes with a named credential — doctor, athlete, professional.
+strategy_note_pt: "Ambiente real com texto sobreposto. Testa profundidade de composição. Ibatível quando você tem citações fortes de profissionais."
 formats: [9:16, 4:5]
 recommended_format: 9:16
 variables:
@@ -154,7 +160,9 @@ Use the attached images as brand reference. Create: a testimonial ad set in [SET
 id: 4
 category: A
 name: Features / Benefits Point-Out
+name_pt: "Dissecando os Benefícios"
 strategy_note: Educational diagram-style layout. Scientific diagram redesigned by a luxury agency. Best for products with multiple distinct technical differentiators.
+strategy_note_pt: "Layout educacional em formato de diagrama. Visual científico reimaginado por uma agência premium. Ideal para diferencias técnicos claros."
 formats: [4:5, 1:1]
 recommended_format: 4:5
 variables:
@@ -187,7 +195,9 @@ Use the attached images as brand reference. Create: an educational diagram-style
 id: 5
 category: A
 name: Bullet-Points
+name_pt: "Checklist Dinâmico"
 strategy_note: Split composition. Product left, benefits right. Clean and scannable in under 3 seconds. Great for awareness audiences who need the "why" fast.
+strategy_note_pt: "Composição dividida. Produto à esquerda, benefícios à direita. Escaneável em menos de 3 segundos. Feito para o topo de funil."
 formats: [4:5, 1:1]
 recommended_format: 4:5
 variables:
@@ -219,7 +229,9 @@ Use the attached images as brand reference. Create: a benefit-list ad, split com
 id: 6
 category: A
 name: Social Proof
+name_pt: "Máxima Prova Social"
 strategy_note: Member count + review card + press logos. The trust stack. Three credibility layers in one frame. Strong for cold audiences who don't know the brand.
+strategy_note_pt: "Contagem de membros + review + selos de imprensa. O empilhamento da confiança. Três camadas de credibilidade em um único frame."
 formats: [4:5, 1:1]
 recommended_format: 4:5
 variables:
@@ -258,7 +270,9 @@ Use the attached images as brand reference. Create: a social proof ad on [BACKGR
 id: 7
 category: A
 name: Us vs Them
+name_pt: "Nós vs Eles"
 strategy_note: Side-by-side comparison. Photography quality gap IS the argument. Use when the brand has clear, demonstrable superiority over a generic competitor category.
+strategy_note_pt: "Comparação lado-a-lado. A diferença na qualidade da imagem É o argumento. Use quando há superioridade visual óbvia contra a concorrência."
 formats: [4:5, 1:1]
 recommended_format: 4:5
 variables:
@@ -367,7 +381,9 @@ Use the attached images as brand reference. Create: Background is close-up of [P
 id: 10
 category: A
 name: Press / Editorial
+name_pt: "Editorial de Imprensa (Vogue)"
 strategy_note: Authority play. Vogue back-page energy. Use for premium brands, or when you have real press quotes from recognisable publications. Generous white space does the work.
+strategy_note_pt: "Autoridade absoluta. Energia de contra-capa de revista. Use o espaço em branco ao seu favor. Perfeito para posicionamento premium."
 formats: [4:5, 1:1]
 recommended_format: 4:5
 variables:
@@ -401,7 +417,9 @@ Use the attached images as brand reference. Create: a press ad on off-white line
 id: 11
 category: B
 name: Pull-Quote Review Card
+name_pt: "Citação e Review Misto"
 strategy_note: Emotional quote headline over a truncated review card. "...Read more" creates an open loop that drives clicks. The most versatile trust template.
+strategy_note_pt: "Título emocional sobre um review truncado. O '...Ler mais' cria um loop cognitivo que aumenta o CTR absurdaente."
 formats: [1:1, 4:5]
 recommended_format: 4:5
 variables:
@@ -577,7 +595,9 @@ Use the attached images as brand reference. Match the exact product design and c
 id: 16
 category: B
 name: Curiosity Gap / Hook Quote Testimonial
+name_pt: "Gancho Surpresa (Curiosidade)"
 strategy_note: The bait-and-switch testimonial. Provocative headline forces the double-take. The reveal reframes it. Scroll-stop machine for women's health, supplements, relationships.
+strategy_note_pt: "Testemunho estilo bait-and-switch. Um título que o usuário precise ler duas vezes para entender. Retém o usuário no scroll."
 formats: [1:1]
 recommended_format: 1:1
 variables:
@@ -619,7 +639,9 @@ Use the attached images as brand reference. Match the exact product design, colo
 id: 17
 category: B
 name: Verified Review Card
+name_pt: "Cartão de Avaliação Verificada"
 strategy_note: Mimics real review platform UI. The verified badge and helpfulness count do the trust-building work without feeling like an ad.
+strategy_note_pt: "Mimetiza a UI de grandes portais de review, evocando familiaridade imediata. O selo verificado faz o trabalho sem parecer um anúncio."
 formats: [1:1, 4:5]
 recommended_format: 1:1
 variables:
@@ -690,7 +712,9 @@ Use the attached images as brand reference. Match the exact product design, colo
 id: 19
 category: B
 name: Highlighted / Annotated Testimonial
+name_pt: "Depoimento Text marker"
 strategy_note: The highlighter pen does the work. Long-form review text with key phrases visually emphasized. Directs the eye to the money lines. Best for health/wellness categories.
+strategy_note_pt: "A caneta marca-texto faz todo o trabalho. Review focado, longo, e com a palavra-chave realçada. Feito para nichos de bem-estar."
 formats: [1:1, 4:5]
 recommended_format: 1:1
 variables:
@@ -737,7 +761,9 @@ Use the attached images as brand reference. Match the exact product design, colo
 id: 20
 category: C
 name: Advertorial / Editorial Content Card
+name_pt: "Cápsula Editorial (Notícia)"
 strategy_note: Looks like a news post, not an ad. Editorial framing creates curiosity and authority. Designed to blend into feed.
+strategy_note_pt: "Formato de um portal de notícias limpo para neutralizar a barreira emocional a propagandas. Feito sob medida para se misturar ao feed."
 formats: [4:5, 9:16]
 recommended_format: 4:5
 variables:
@@ -769,7 +795,9 @@ Use the attached images as brand reference for tone ONLY. Do NOT use polished ad
 id: 21
 category: C
 name: Bold Statement / Reaction Headline
+name_pt: "Declaração Absoluta"
 strategy_note: Pure brand energy. No stats, no reviews. Just a provocative line, a gradient, and the product. The copy IS the ad. Best for food and lifestyle brands with personality.
+strategy_note_pt: "Pura energia da marca. Sem estatísticas, sem rodeios. É um manifesto provocativo, gradiente fluido e uma imagem central."
 formats: [1:1]
 recommended_format: 1:1
 variables:
@@ -807,7 +835,9 @@ Use the attached images as brand reference. Match the exact product design, colo
 id: 22
 category: C
 name: Flavor Story / "Tastes Like"
+name_pt: "A Cópia do Sabor"
 strategy_note: Food background IS the headline. Product is the payoff. Use for any food, beverage, or supplement with a compelling flavor story. The food scene does 80% of the work.
+strategy_note_pt: "Os ingredientes compõem a imagem central com o produto no payoff. Se é muito mais do sabor e sensação, 80% do ad foi feito."
 formats: [1:1, 4:5]
 recommended_format: 1:1
 variables:
@@ -840,7 +870,9 @@ Use the attached images as brand reference. Match the exact product design, colo
 id: 23
 category: C
 name: Long-Form Manifesto / Letter Ad
+name_pt: "Carta Aberta / Manifesto Longo"
 strategy_note: Copy-dominant. No background imagery. The writing IS the ad. Use for premium brands with a strong point of view — address a price objection or brand philosophy head-on.
+strategy_note_pt: "O texto domina a peça e exclui ruídos visuais. Perfeito para marcas premium em que você precisa convencer ou quebrar objeções."
 formats: [1:1, 4:5]
 recommended_format: 1:1
 variables:
@@ -905,7 +937,9 @@ Use the attached images as brand reference. Match the exact product design and p
 id: 25
 category: C
 name: Us vs Them — Color Split
+name_pt: "Nós vs Eles — Contraste Brutal"
 strategy_note: More visual than the classic Us vs Them. Brand color dominates the winning side. Dynamic product shot on your side vs static generic competitor. The visual contrast is the argument.
+strategy_note_pt: "As cores da sua marca dominam visualmente metade da tela superando os beges das soluções genéricas atuais."
 formats: [1:1, 4:5]
 recommended_format: 1:1
 variables:
@@ -973,7 +1007,9 @@ Use the attached images as brand reference. Match exact brand colors and typogra
 id: 27
 category: C
 name: Benefit Checklist Showcase
+name_pt: "Mostruário Orientado"
 strategy_note: Information-dense. Product overhead + benefits right + CTA button. Great for consideration-stage audiences who need details before buying.
+strategy_note_pt: "Altamente informativo. Ideal para públicos mornos e fase de consideração do funil de vendas em performance contínua."
 formats: [1:1, 4:5]
 recommended_format: 1:1
 variables:
@@ -1011,7 +1047,9 @@ Use the attached images as brand reference. Match the exact product design and b
 id: 28
 category: C
 name: Feature Arrow Callout / Product Annotation
+name_pt: "Anotação Editorial Dinâmica"
 strategy_note: Hand holds the product. Curved arrows point to 4 callouts. Editorial feel. Strong for products with multiple distinct physical features or ingredients.
+strategy_note_pt: "Setas guiam o olhar. Estilo minimal e informativo indicando as partes com inovação tecnológica em uso diário."
 formats: [1:1, 4:5]
 recommended_format: 1:1
 variables:
@@ -1128,7 +1166,9 @@ Use the attached images as brand reference. Match exact brand colors, packaging,
 id: 31
 category: D
 name: Comparison Grid / Table
+name_pt: "Grade de Vantagens (Tabela)"
 strategy_note: Attribute rows, no icons. The copy contrast does the work. Viral on X and Reddit. Use when your ingredient or formula advantages are clear and specific.
+strategy_note_pt: "Conquiste rapidamente leads racionais através das métricas claras nos atributos mais técnicos do seu material."
 formats: [1:1]
 recommended_format: 1:1
 variables:
@@ -1161,7 +1201,9 @@ Use the attached images as brand reference. Match the exact product packaging pr
 id: 32
 category: D
 name: UGC Story Callout / Text Bubble Explainer
+name_pt: "Insta Story (Mensagens)"
 strategy_note: iPhone photo + Instagram Story text bubbles. Educational but organic. Teaches the category problem and solution while looking like a real customer's Story post.
+strategy_note_pt: "Formato conversacional. Foto + Bubbles de DM, educa a audiência através do diálogo sem romper os moldes nativos."
 formats: [9:16]
 recommended_format: 9:16
 variables:
@@ -1201,7 +1243,9 @@ Use the attached images as brand reference for product color and packaging ONLY.
 id: 33
 category: D
 name: Faux Press / News Article Screenshot
+name_pt: "Falso Artigo (Autoridade Máxima)"
 strategy_note: Designed to look like a real article screenshot someone shared to their Story. High authority, zero ad feel. Best for beauty, wellness, and lifestyle brands.
+strategy_note_pt: "Imita com clareza capturas da web por de revistas consagradas na percepção geral social, alavancando os selos invisíveis."
 formats: [4:5]
 recommended_format: 4:5
 variables:
@@ -1238,7 +1282,9 @@ Use the attached images as brand reference. Create: a static ad designed to look
 id: 34
 category: D
 name: Faux iPhone Notes Screenshot
+name_pt: "Notas Pessoais (iOS Nativo)"
 strategy_note: iOS Notes UI with benefits listed. Ultra native. Zero ad feel. The product breaks the frame slightly — the one design touch that makes it real.
+strategy_note_pt: "O produto rasga a UI original das notas do iOS. Autenticidade é forçada na intimidade de um app comum, ultra-familiar."
 formats: [1:1, 4:5]
 recommended_format: 1:1
 variables:
@@ -1454,7 +1500,9 @@ Use the attached images as brand reference for visual tone ONLY. Do NOT include 
 id: 40
 category: D
 name: Native / Ugly Post-It Note Style
+name_pt: "Lembrete Post-it Sujo"
 strategy_note: Lifestyle product photo with a hand-written Post-it note stuck to the packaging. Zero polish. Looks like someone genuinely picked this up and wrote a note on it.
+strategy_note_pt: "Com letramento à mão cobrindo parcialmente a estátua em tons rudes. Alta conversão sem parecer com mídias corporativas usuais."
 formats: [4:5, 9:16]
 recommended_format: 4:5
 variables:
@@ -1507,7 +1555,9 @@ Use the attached images as brand reference. Match the exact [PRODUCT DESCRIPTION
 id: 41
 category: E
 name: Multilingual / Localisation Ad
+name_pt: "Localização de Linguagem Múltipla"
 strategy_note: Same ad, two languages side by side. NB2 renders non-Latin scripts cleanly — Korean, Arabic, Portuguese. Use to scale into new markets without separate creative shoots.
+strategy_note_pt: "Um único material expandindo a cópia por países simultâneos com estética tipográfica e tipagem refinada na borda."
 formats: [1:1, 4:5]
 recommended_format: 4:5
 variables:
@@ -1541,7 +1591,9 @@ Use the attached images as brand reference. Match the exact product colors, typo
 id: 42
 category: E
 name: Typographic Window — Text as Image
+name_pt: "Tipografia de Máscara (Janela)"
 strategy_note: Large word as a cut-out window. Product or scene visible only through the letters. Striking editorial device — high stopping power on Instagram and Pinterest.
+strategy_note_pt: "Letras espessas usadas como recorte de estampa criando uma janela com fundos visíveis, retendo as esferas curiosamente."
 formats: [1:1, 4:5]
 recommended_format: 1:1
 variables:
@@ -1576,7 +1628,9 @@ Use the attached images as brand reference. Create: a typographic poster-style a
 id: 43
 category: E
 name: Multi-Reference Composite — Product in New Environment
+name_pt: "Fusão de Ambiente Global"
 strategy_note: Up to 14 reference images merged. Product inserted into a generated lifestyle scene. Eliminates the need for expensive location shoots — generate the environment around the product.
+strategy_note_pt: "Integra o produto no mood sem sessões criativas na gringa em locação presencial. Perfeito para internacionalização de moodboards."
 formats: [4:5, 9:16, 1:1]
 recommended_format: 4:5
 variables:
@@ -1606,7 +1660,9 @@ Using the attached reference images: [IMAGE 1 = product front], [IMAGE 2 = produ
 id: 44
 category: E
 name: Disposable Camera / Y2K Aesthetic
+name_pt: "Nostalgia Geração Y2K"
 strategy_note: Cheap film flash aesthetic. Nostalgia drives virality. Authenticity over polish. Use for Gen Z audiences, food/beverage brands, and any product meant for social moments.
+strategy_note_pt: "Estética de flash barato, imperfeito que alavanca virais instantâneos e atrai o jovem em seus desejos íntimos via saudosidade crua."
 formats: [1:1, 9:16]
 recommended_format: 9:16
 variables:
@@ -1632,7 +1688,9 @@ Use the attached images as brand reference for product colors and packaging ONLY
 id: 45
 category: E
 name: Chiaroscuro / Luxury Dark Editorial
+name_pt: "Editorial Dramático (Modo Escuro)"
 strategy_note: High contrast dramatic lighting. Premium, moody, authoritative. Luxury brand energy. Use for premium skincare, spirits, jewellery, high-end supplements.
+strategy_note_pt: "Alto contraste escurecendo todo o palco em foco pro premium. Joias e Skincare e alta perfumaria se beneficiam pela excelência absoluta."
 formats: [4:5, 1:1]
 recommended_format: 4:5
 variables:
@@ -1667,7 +1725,9 @@ Use the attached images as brand reference. Match exact product design and brand
 id: 46
 category: E
 name: Macro Texture Hero
+name_pt: "Close Up em Texturas Intensas"
 strategy_note: Extreme close-up on ingredient or texture. Sensory appeal before the sell. Use for food, skincare, or supplement brands where the ingredients are a differentiator.
+strategy_note_pt: "O foco macro amplia o desejo sensorial das comidas antes da palavra ser lida atraindo instintos básicos de sobrevivência primais."
 formats: [1:1, 4:5]
 recommended_format: 1:1
 variables:
@@ -1698,7 +1758,9 @@ Use the attached images as brand reference. Match exact product brand colors and
 id: 47
 category: E
 name: Golden Hour Lifestyle
+name_pt: "Lifestyle sem Textos (Golden Hour)"
 strategy_note: Outdoor use with backlight. Long shadows. Aspirational but real. No headline text — the lifestyle moment IS the message. Use for wellness, fitness, outdoor, and food brands.
+strategy_note_pt: "Contra-lux nas sombras prolongadas mostrando a vivência sem interrupções letradas. Seus clientes vão clicar de tanta vontade real."
 formats: [9:16, 4:5]
 recommended_format: 4:5
 variables:
@@ -1729,7 +1791,9 @@ Use the attached images as brand reference. Match exact product design and packa
 id: 48
 category: E
 name: Style Transfer — Editorial Reference
+name_pt: "Transferência Artística (Editoriais)"
 strategy_note: Product photo transformed into a recognizable editorial visual style. Art direction as differentiation. Use when you want your brand to be associated with a specific publication aesthetic.
+strategy_note_pt: "Transferência referencial e arte conceitual aplicadas via prompts com peso brutal estético na campanha anual perene sem prazo limítrofe."
 formats: [4:5, 1:1]
 recommended_format: 4:5
 variables:
@@ -1758,7 +1822,9 @@ Use the attached images as brand reference. Using the product images as the subj
 id: 49
 category: E
 name: Fujifilm / Analog Color Science
+name_pt: "Emulação Filme (Fuji Analógica)"
 strategy_note: Authentic film color science. For lifestyle brands where realness is the brand. Shot on Fujifilm X100VI feel. No text, no logo — the product just lives in the scene.
+strategy_note_pt: "Estudos de filme Fujifilm X100VI trazem texturas táteis pro cotidiano eliminando publicidade comum."
 formats: [1:1, 9:16]
 recommended_format: 1:1
 variables:
@@ -1787,7 +1853,9 @@ Use the attached images as brand reference for product color and packaging ONLY.
 id: 50
 category: E
 name: Semantic Inpainting — Product Swap
+name_pt: "Troca Semântica no Feed do Usuário"
 strategy_note: User's own lifestyle photo with their old product replaced by yours. Highest personalization potential. The existing photo provides authentic context that a generated scene cannot replicate.
+strategy_note_pt: "Uso com cenários base para substituição natural ao lifestyle local eliminando custos astronômicos."
 formats: [1:1, 4:5, 9:16]
 recommended_format: 4:5
 variables:
@@ -1823,7 +1891,9 @@ Reference image provided: [USER'S LIFESTYLE PHOTO — attached]. Using this phot
 id: 51
 category: F
 name: Founder / Talking Head Quote Card
+name_pt: "A Citação do Fundador"
 strategy_note: Founder face = trust. Direct quote = authenticity. The anti-corporate play. Use when the founder has a compelling personal story connected to why the product was created.
+strategy_note_pt: "O rosto é igual a total transparência. Use no tráfego morno contando por que o produto nasceu das suas dores pessoais internas."
 formats: [4:5, 1:1]
 recommended_format: 4:5
 variables:
@@ -1859,7 +1929,9 @@ Use the attached images as brand reference. Create: a founder-forward ad. Left 4
 id: 52
 category: F
 name: Urgency / Scarcity Countdown
+name_pt: "Urgência Visual Absoluta"
 strategy_note: Time pressure as the visual. The clock IS the creative. Use for flash sales, limited launches, or any time-limited offer. The countdown timer makes the urgency visceral.
+strategy_note_pt: "A escassez real cria viscerabilidade através das métricas claras como ponteiros ou avisos decrescentes contundindo com força."
 formats: [9:16, 4:5]
 recommended_format: 9:16
 variables:
@@ -1898,7 +1970,9 @@ Use the attached images as brand reference. Match exact brand colors and packagi
 id: 53
 category: F
 name: Ingredient Transparency Map
+name_pt: "Mapa Radical de Ingredientes"
 strategy_note: Every ingredient called out with source. Clean label brands, this is your ad. Builds trust through radical transparency. Best for supplements, food, skincare.
+strategy_note_pt: "Rótulos limpos detalhando por de onde o lote procede para conquistar lealdade na alimentação natural ou no universo fitness contemporâneo."
 formats: [1:1, 4:5]
 recommended_format: 1:1
 variables:
@@ -1931,7 +2005,9 @@ Use the attached images as brand reference. Match exact product design and brand
 id: 54
 category: F
 name: Dual-Face / Problem-Solution Split
+name_pt: "Espelho do Problema e A Solução"
 strategy_note: Same person, two states. Left is the problem. Right is the life with your product. No arrows, no labels — the visual contrast is the entire argument.
+strategy_note_pt: "Esquerda antes e direita os ganhos depois. Contraste puro sem marcações corporativas pra elevar ao extremo a dissonância pessoal diária."
 formats: [1:1, 4:5]
 recommended_format: 4:5
 variables:
@@ -1970,7 +2046,9 @@ Use the attached images as brand reference. Create: a split-panel transformation
 id: 55
 category: F
 name: Bundle / Kit Hero Shot
+name_pt: "Kits Completos Visualmente Amplos"
 strategy_note: Sell the system, not the SKU. Flat lay of the complete kit = perceived value. Use for subscription products, starter kits, gift sets, or any multi-product offering.
+strategy_note_pt: "Arranjos espalhados no chão entregam percepções vastas de entrega superior infundidas numa lógica super acessível comparada."
 formats: [1:1, 4:5]
 recommended_format: 1:1
 variables:
@@ -2011,7 +2089,9 @@ Use the attached images as brand reference. Match the exact product design, colo
 id: 56
 category: F
 name: Reaction / Duet Format
+name_pt: "Mimetismo Dueto Social"
 strategy_note: Person watching content about the product. The meta-layer creates curiosity. Mimics TikTok Duet UI. The product is only visible on the phone screen — person is the hook.
+strategy_note_pt: "As interfaces divididas por um receptor das redes no gancho mantem os expectadores para desvendarem a métrica proposta curiosa do post."
 formats: [9:16, 4:5]
 recommended_format: 9:16
 variables:
@@ -2039,7 +2119,9 @@ Use the attached images as brand reference for product ONLY. This must NOT look 
 id: 57
 category: F
 name: Ambient / No-Product Brand Moment
+name_pt: "Pura Conscientização Ambiental"
 strategy_note: No product shown. The feeling IS the ad. Pure brand building. Use at the top of the funnel or as a brand awareness play when the emotion is stronger than any claim.
+strategy_note_pt: "A emoção é a própria campanha em alto padrão brand. Sentimento e essência transmutam lógicas mercenárias pra conexões vitalícias orgânicas e densas."
 formats: [4:5, 16:9]
 recommended_format: 4:5
 variables:
@@ -2073,7 +2155,9 @@ Use the attached images as brand reference for color palette and tone ONLY. Do N
 id: 58
 category: F
 name: Price Anchor / Value Reframe
+name_pt: "Ancoragem Diária Extrema"
 strategy_note: Shows the cost of NOT buying. Daily cost framing makes price disappear. Use when the product is priced higher than alternatives but the daily cost is actually low.
+strategy_note_pt: "Distorcer os aportes mensais no escopo trivial faz com que custos diários pareçam irrisórios ao comparativo da perca ao se abdicar do clique principal em vigor ali agora."
 formats: [1:1, 4:5]
 recommended_format: 1:1
 variables:
@@ -2114,7 +2198,9 @@ Use the attached images as brand reference. Match exact product design and brand
 id: 59
 category: F
 name: Meme-Native / Culturally Aware
+name_pt: "Cultura Nativa & Humor Leve"
 strategy_note: Meme format borrowed to carry the brand message. Humor earns organic reach. Authentic meme quality — do not over-produce. The brand barely claims it.
+strategy_note_pt: "Usa o sarcasmo atualizado dos formatos na web pra conquistar organicamente audiências esgotadas evitando super-exposição forçosa na plataforma toda vez ali imposta em feed infinito da vida digital moderna das pessoas."
 formats: [1:1]
 recommended_format: 1:1
 variables:
@@ -2151,7 +2237,9 @@ Use the attached images as brand reference for product ONLY. The visual format m
 id: 60
 category: F
 name: Cinematic Keyframe / Story Ad
+name_pt: "Ato Único Cinematográfico"
 strategy_note: Single frame from an imaginary film about the brand. Pure cinematic brand positioning. No stats, no reviews. For brands entering video-first by starting with a single powerful still.
+strategy_note_pt: "Uma paralisação frame a frame de cena de filmes propostos, com alto contraste e direção fotográfica na excelência suprema das objetivas no luxo global da propaganda impressa para TV em mídias online fixas temporais ali postadas no scroll contínuo e letárgico dos usuários."
 formats: [4:5, 16:9]
 recommended_format: 4:5
 variables:

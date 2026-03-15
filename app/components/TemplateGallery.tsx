@@ -7,7 +7,9 @@ interface Template {
   id: number;
   category: string;
   name: string;
+  name_pt?: string;
   strategyNote: string;
+  strategyNote_pt?: string;
   formats: string[];
 }
 
@@ -20,7 +22,20 @@ const CATEGORY_NAMES: Record<string, string> = {
   F: "Brand Building"
 };
 
+const CATEGORY_NAMES_PT: Record<string, string> = {
+  A: "Performance Direta",
+  B: "Prova Social Máxima",
+  C: "Conteúdo Nativo (UGC)",
+  D: "Educação Analítica",
+  E: "Avanço Visual",
+  F: "Branding de Luxo"
+};
+
+import { useSettingsStore } from "../store/useSettingsStore";
+
 export function TemplateGallery({ sendMessage }: { sendMessage: (text: string) => void }) {
+  const { language } = useSettingsStore();
+
   const [templates, setTemplates] = useState<Template[]>([]);
   const [activeCategory, setActiveCategory] = useState<string>("A");
   const [loading, setLoading] = useState(true);
@@ -68,7 +83,7 @@ export function TemplateGallery({ sendMessage }: { sendMessage: (text: string) =
                 : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white"
             }`}
           >
-            {CATEGORY_NAMES[cat] || `Category ${cat}`}
+            {language === "pt" ? (CATEGORY_NAMES_PT[cat] || `Categoria ${cat}`) : (CATEGORY_NAMES[cat] || `Category ${cat}`)}
           </button>
         ))}
       </div>
@@ -97,11 +112,11 @@ export function TemplateGallery({ sendMessage }: { sendMessage: (text: string) =
             </div>
 
             <h3 className="text-[15px] font-semibold text-white/90 leading-snug mb-2 group-hover:text-white transition-colors line-clamp-2">
-              {template.name}
+              {language === "pt" && template.name_pt ? template.name_pt : template.name}
             </h3>
             
             <p className="text-xs text-white/50 leading-relaxed line-clamp-3 mt-auto">
-              {template.strategyNote}
+              {language === "pt" && template.strategyNote_pt ? template.strategyNote_pt : template.strategyNote}
             </p>
           </div>
         ))}

@@ -12,7 +12,9 @@ export interface TemplateData {
   id: number;
   category: string;
   name: string;
+  name_pt?: string;
   strategyNote: string;
+  strategyNote_pt?: string;
   formats: string[];
   recommendedFormat: string;
   variables: TemplateVariable[];
@@ -58,6 +60,8 @@ export function loadTemplates(): Map<number, TemplateData> {
     // Parse YAML fields manually (simple parser)
     const category = yamlContent.match(/^category:\s*(.+)/m)?.[1]?.trim() || "";
     const strategyNote = yamlContent.match(/^strategy_note:\s*(.+)/m)?.[1]?.trim() || "";
+    const namePt = yamlContent.match(/^name_pt:\s*"(.+)"/m)?.[1]?.trim();
+    const strategyNotePt = yamlContent.match(/^strategy_note_pt:\s*"(.+)"/m)?.[1]?.trim();
     const formatsMatch = yamlContent.match(/^formats:\s*\[(.+)\]/m);
     const formats = formatsMatch
       ? formatsMatch[1].split(",").map((f) => f.trim().replace(/['"]/g, ""))
@@ -88,7 +92,9 @@ export function loadTemplates(): Map<number, TemplateData> {
       id,
       category,
       name,
+      name_pt: namePt,
       strategyNote,
+      strategyNote_pt: strategyNotePt,
       formats,
       recommendedFormat,
       variables,
