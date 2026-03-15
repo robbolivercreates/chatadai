@@ -1,0 +1,226 @@
+@import "tailwindcss";
+
+/* ─── AdForge dark theme ─────────────────────────────────────────── */
+:root {
+  /* Backgrounds */
+  --background-nav: #111112;
+  --background-main: #1a1a1b;
+  --background-surface: #222224;
+
+  /* Fill / surface */
+  --fill-tsp-white-main: rgba(255, 255, 255, 0.08);
+  --fill-tsp-white-light: rgba(255, 255, 255, 0.05);
+  --fill-tsp-white-dark: rgba(255, 255, 255, 0.22);
+  --fill-input-chat: rgba(255, 255, 255, 0.05);
+
+  /* Text */
+  --text-primary: rgba(255, 255, 255, 0.92);
+  --text-secondary: rgba(255, 255, 255, 0.60);
+  --text-tertiary: rgba(255, 255, 255, 0.38);
+  --text-disable: rgba(255, 255, 255, 0.18);
+
+  /* Icon */
+  --icon-primary: rgba(255, 255, 255, 0.90);
+  --icon-secondary: rgba(255, 255, 255, 0.50);
+  --icon-tertiary: rgba(255, 255, 255, 0.32);
+  --icon-disable: rgba(255, 255, 255, 0.18);
+
+  /* Border */
+  --border-main: rgba(255, 255, 255, 0.08);
+  --border-dark: rgba(255, 255, 255, 0.18);
+
+  /* Button */
+  --btn-primary: rgba(255, 255, 255, 0.92);
+
+  /* Accent */
+  --accent: #6366f1;
+  --accent-hover: #5254cc;
+  --function-error: #ef4444;
+}
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --color-bg-100: #1a1a1b;
+  --color-sidebar-bg: #111112;
+}
+
+html,
+body {
+  height: 100vh;
+  height: 100dvh;
+  margin: 0;
+  overflow: hidden;
+  background: var(--background-main);
+  color: var(--text-primary);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* ─── Sidebar / nav ─────────────────────────────────────────────── */
+.icon-rail {
+  width: 52px;
+  background: var(--background-nav);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.icon-btn {
+  min-width: 36px;
+  min-height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s;
+  color: var(--icon-primary);
+  flex-shrink: 0;
+}
+
+.icon-btn:hover {
+  background: var(--fill-tsp-white-light);
+}
+
+.icon-btn.active {
+  background: var(--fill-tsp-white-main);
+}
+
+.sidebar-divider {
+  height: 1px;
+  margin: 0 8px;
+  background: var(--border-main);
+}
+
+/* ─── Chat input ─────────────────────────────────────────────────── */
+.chat-input-container {
+  border-radius: 22px;
+  background: var(--fill-input-chat);
+  border: 1px solid var(--border-main);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  transition: border-color 0.2s;
+}
+
+.chat-input-container:focus-within {
+  border-color: var(--border-dark);
+}
+
+.chat-input-container textarea {
+  background: transparent;
+  caret-color: var(--text-primary);
+}
+
+.chat-input-container textarea::placeholder {
+  color: var(--text-tertiary);
+}
+
+/* ─── Quick-action pills ─────────────────────────────────────────── */
+.action-pill {
+  height: 36px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  border: 1px solid var(--border-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  color: var(--text-primary);
+  font-size: 13px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.action-pill:hover {
+  background: var(--fill-tsp-white-light);
+  border-color: var(--border-dark);
+}
+
+.action-pill.selected {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* ─── Typing dots ────────────────────────────────────────────────── */
+.typing-dot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--text-tertiary);
+  animation: typing-bounce 1.2s ease-in-out infinite;
+}
+
+@keyframes typing-bounce {
+  0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-3px); }
+}
+
+/* ─── Scrollbars ─────────────────────────────────────────────────── */
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+.dark-scrollbar::-webkit-scrollbar { width: 4px; }
+.dark-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.dark-scrollbar::-webkit-scrollbar-thumb { background: var(--text-disable); border-radius: 2px; }
+.dark-scrollbar::-webkit-scrollbar-thumb:hover { background: var(--text-tertiary); }
+
+/* ─── Ad preview card ────────────────────────────────────────────── */
+.ad-preview-card {
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--background-surface);
+  border: 1px solid var(--border-main);
+}
+
+/* ─── Brand DNA card ─────────────────────────────────────────────── */
+.brand-dna-card {
+  background: linear-gradient(135deg, rgba(99,102,241,0.12), rgba(99,102,241,0.04));
+  border: 1px solid rgba(99,102,241,0.24);
+  border-radius: 16px;
+  padding: 16px 20px;
+}
+
+/* ─── Format selector pill (active) ─────────────────────────────── */
+.format-pill {
+  height: 34px;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  border: 1px solid var(--border-main);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  color: var(--text-secondary);
+  background: transparent;
+}
+
+.format-pill:hover {
+  background: var(--fill-tsp-white-light);
+  color: var(--text-primary);
+}
+
+.format-pill.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* ─── Mobile safe area ───────────────────────────────────────────── */
+@supports (padding: env(safe-area-inset-bottom)) {
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+@media (max-width: 767px) {
+  .icon-btn { min-width: 44px; min-height: 44px; }
+  .action-pill { height: 44px; padding: 8px 16px; }
+}
