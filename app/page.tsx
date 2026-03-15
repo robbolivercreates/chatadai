@@ -5,6 +5,7 @@ import {
   Send, Paperclip, Plus, Settings, Trash2, X,
   MessageSquare, Loader2, PanelLeft, Link, Upload
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useChatStore } from "./store/useChatStore";
 import { useSettingsStore } from "./store/useSettingsStore";
 import { MessageBubble } from "./components/MessageBubble";
@@ -16,12 +17,6 @@ function generateId() {
   return Math.random().toString(36).slice(2, 10);
 }
 
-// ─── Welcome screen chips ─────────────────────────────────────────
-const CHIPS = [
-  { icon: "🔗", label: "Analisar site da marca", prompt: "Quero usar meu site da marca" },
-  { icon: "📸", label: "Fazer upload de fotos", prompt: "Quero fazer upload de fotos do meu produto" },
-];
-
 export default function Home() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
@@ -31,7 +26,18 @@ export default function Home() {
   const [showFormatSelector, setShowFormatSelector] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [loadingLabel, setLoadingLabel] = useState("Thinking...");
+
+  const tChat = useTranslations("chat");
+  const tWelcome = useTranslations("welcome");
+  const tSidebar = useTranslations("sidebar");
+  const tSettings = useTranslations("settings");
+
+  const [loadingLabel, setLoadingLabel] = useState(tChat("thinking"));
+
+  const CHIPS = [
+    { icon: "🔗", label: tWelcome("chipUrl"), prompt: "Quero usar meu site da marca" },
+    { icon: "📸", label: tWelcome("chipUpload"), prompt: "Quero fazer upload de fotos do meu produto" },
+  ];
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -137,11 +143,11 @@ export default function Home() {
     setInput("");
     setUploadedImages([]);
     setIsLoading(true);
-    setLoadingLabel("Thinking...");
+    setLoadingLabel(tChat("thinking"));
     setShowFormatSelector(false);
 
     const slowTimer = setTimeout(() => {
-      setLoadingLabel("Creating your ad...");
+      setLoadingLabel(tChat("creatingAd"));
     }, 6000);
 
     try {
@@ -303,7 +309,7 @@ export default function Home() {
               onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
             >
               <Plus size={14} />
-              New session
+              {tChat("newSession")}
             </button>
           </div>
 
@@ -313,7 +319,7 @@ export default function Home() {
           <div className="flex-1 overflow-y-auto dark-scrollbar py-2 px-1">
             {sessions.length === 0 && (
               <p className="px-3 pt-2 text-xs" style={{ color: "var(--text-tertiary)" }}>
-                No sessions yet
+                {tChat("noSessions")}
               </p>
             )}
             {sessions.map((session) => (
@@ -341,7 +347,7 @@ export default function Home() {
                 <button
                   className="opacity-0 group-hover:opacity-100 transition-opacity p-1 rounded"
                   onClick={(e) => { e.stopPropagation(); deleteSession(session.id); }}
-                  title="Delete"
+                  title={tSidebar("deleteSession")}
                 >
                   <Trash2 size={11} style={{ color: "var(--text-tertiary)" }} />
                 </button>
@@ -360,7 +366,7 @@ export default function Home() {
               onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
             >
               <Settings size={14} />
-              Settings
+              {tSettings("title")}
             </button>
           </div>
         </aside>
@@ -402,10 +408,10 @@ export default function Home() {
                 ✦
               </div>
               <h1 className="text-2xl font-bold tracking-tight" style={{ color: "var(--text-primary)" }}>
-                AdForge
+                {tWelcome("title")}
               </h1>
               <p className="text-sm max-w-xs" style={{ color: "var(--text-secondary)" }}>
-                Turn your product photos into professional ad creatives. No design skills needed.
+                {tWelcome("subtitle")}
               </p>
             </div>
 
@@ -425,7 +431,7 @@ export default function Home() {
 
             {/* Input */}
             <div className="w-full max-w-xl">
-              {renderInput("What's your brand or website? Let's create some ads...")}
+              {renderInput(tChat("placeholder"))}
             </div>
           </div>
         ) : (
@@ -484,7 +490,7 @@ export default function Home() {
 
             {/* Input area */}
             <div className="flex-shrink-0 px-4 pb-4 pt-2 max-w-3xl mx-auto w-full">
-              {renderInput("Reply here...")}
+              {renderInput(tChat("placeholderChat"))}
             </div>
           </>
         )}
@@ -548,7 +554,7 @@ export default function Home() {
             onClick={() => fileInputRef.current?.click()}
             className="icon-btn w-8 h-8"
             style={{ border: "1px solid var(--border-main)" }}
-            title="Upload product images"
+            title={tChat("upload")}
           >
             <Paperclip size={14} />
           </button>

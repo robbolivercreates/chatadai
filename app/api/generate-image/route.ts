@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
     // Nano Banana 2 — image generation model
     const model = genAI.getGenerativeModel({ model: MODEL_IMAGE_DEFAULT });
 
-    const parts: object[] = [];
+    const parts: any[] = [];
 
     // Product reference images
     if (images && images.length > 0) {
@@ -49,14 +49,13 @@ export async function POST(req: NextRequest) {
     const result = await model.generateContent({
       contents: [{ role: "user", parts }],
       generationConfig: {
-        // @ts-expect-error — responseModalities is a valid field for image-capable models
         responseModalities: ["TEXT", "IMAGE"],
         imageConfig: {
           imageSize: "1K",
           aspectRatio,
         },
       },
-    });
+    } as any);
 
     const response = result.response;
     const candidates = response.candidates?.[0]?.content?.parts || [];

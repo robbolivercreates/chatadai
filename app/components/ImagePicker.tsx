@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import { useTranslations } from "next-intl";
+
 interface ScrapedImage {
   data: string;
   mimeType: string;
@@ -14,6 +16,7 @@ interface Props {
 }
 
 export function ImagePicker({ images, onConfirm }: Props) {
+  const t = useTranslations("chat");
   const [selected, setSelected] = useState<Set<number>>(new Set(images.map((_, i) => i)));
 
   const toggleImage = (index: number) => {
@@ -36,7 +39,7 @@ export function ImagePicker({ images, onConfirm }: Props) {
   return (
     <div className="w-full max-w-lg mt-3 mb-2">
       <p className="text-xs font-medium mb-3" style={{ color: "var(--text-secondary)" }}>
-        📸 Product images found — tap to select the ones you want to use:
+        {t("foundImages")}
       </p>
 
       <div className="flex gap-3 overflow-x-auto pb-3 scrollbar-hide">
@@ -87,7 +90,7 @@ export function ImagePicker({ images, onConfirm }: Props) {
           cursor: selected.size > 0 ? "pointer" : "not-allowed",
         }}
       >
-        Use {selected.size} {selected.size === 1 ? "image" : "images"} for ads →
+        {selected.size === 1 ? t("useImage") : t("useImages").replace("{count}", String(selected.size))}
       </button>
     </div>
   );

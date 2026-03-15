@@ -1,0 +1,37 @@
+{
+  "settings": {
+    "title": "Settings",
+    "apiKey": "Gemini API Key",
+    "save": "Save",
+    "language": "Language"
+  },
+  "chat": {
+    "newSession": "New session",
+    "noSessions": "No sessions yet",
+    "placeholder": "What's your brand or website? Let's create some ads...",
+    "placeholderChat": "Reply here...",
+    "thinking": "Thinking...",
+    "creatingAd": "Creating your ad...",
+    "upload": "Upload product images",
+    "analyzingSite": "Analyzing your site...",
+    "foundImages": "📸 Product images found — tap to select the ones you want to use:",
+    "useImages": "Use {count} images for ads →",
+    "useImage": "Use 1 image for ads →"
+  },
+  "welcome": {
+    "title": "AdForge",
+    "subtitle": "Turn your product photos into professional ad creatives. No design skills needed.",
+    "chipUpload": "Upload photos",
+    "chipUrl": "Analyse brand website"
+  },
+  "sidebar": {
+    "deleteSession": "Delete"
+  },
+  "brand": {
+    "title": "Brand DNA"
+  },
+  "templateGallery": {
+    "title": "Choose an Ad Format",
+    "subtitle": "Select the template category you want to generate next"
+  }
+}

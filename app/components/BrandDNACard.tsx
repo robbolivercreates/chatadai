@@ -1,12 +1,15 @@
 "use client";
 
 import type { BrandDNAPart } from "../types";
+import { useTranslations } from "next-intl";
 
 interface Props {
   part: BrandDNAPart;
 }
 
 export function BrandDNACard({ part }: Props) {
+  const t = useTranslations("brand");
+  
   return (
     <div className="brand-dna-card max-w-[520px] w-full">
       {/* Header */}
@@ -22,7 +25,7 @@ export function BrandDNACard({ part }: Props) {
             {part.brandName}
           </p>
           <p className="text-xs" style={{ color: "var(--text-secondary)" }}>
-            Brand DNA · {part.productName}
+            {t("title")} · {part.productName}
           </p>
         </div>
       </div>

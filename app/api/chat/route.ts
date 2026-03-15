@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "@google/generative-ai";
+import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold, Part } from "@google/generative-ai";
 import type { BrandDNA } from "../../types";
 import { getTemplate, fillTemplatePrompt, getTemplateReference } from "../../lib/templates";
 import { MODEL_CHAT_DEFAULT, MODEL_IMAGE_DEFAULT } from "../../lib/gemini-models";
@@ -720,7 +720,7 @@ export async function POST(req: NextRequest) {
     const lastMessage = messages[messages.length - 1];
 
     // Build the current message parts (text + any images)
-    const currentParts: object[] = [];
+    const currentParts: Part[] = [];
 
     if (images && images.length > 0) {
       images.forEach((img) => {
@@ -864,7 +864,7 @@ export async function POST(req: NextRequest) {
 
         // --- CALL IMAGE GENERATION ---
         const imageModel = genAI.getGenerativeModel({ model: MODEL_IMAGE_DEFAULT });
-        const imageParts: object[] = [];
+        const imageParts: Part[] = [];
 
         // Include product images if available
         if (images && images.length > 0) {
@@ -885,7 +885,6 @@ export async function POST(req: NextRequest) {
 
         const imageResult = await imageModel.generateContent({
           contents: [{ role: "user", parts: imageParts }],
-          // @ts-expect-error — these fields are valid for Nano Banana 2 but not in old SDK types
           tools: [{
             googleSearch: {
               searchTypes: {
@@ -895,14 +894,13 @@ export async function POST(req: NextRequest) {
             },
           }],
           generationConfig: {
-            // @ts-expect-error — responseModalities + imageConfig valid for image-capable models
             responseModalities: ["TEXT", "IMAGE"],
             imageConfig: {
               imageSize: "1K",
               aspectRatio,
             },
           },
-        });
+        } as any);
 
         const candidates = imageResult.response.candidates?.[0]?.content?.parts || [];
 

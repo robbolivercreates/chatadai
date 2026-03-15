@@ -1,0 +1,37 @@
+{
+  "settings": {
+    "title": "Configurações",
+    "apiKey": "Chave da API Gemini",
+    "save": "Salvar",
+    "language": "Idioma / Language"
+  },
+  "chat": {
+    "newSession": "Nova sessão",
+    "noSessions": "Nenhuma sessão ainda",
+    "placeholder": "O que é sua marca ou site? Vamos criar anúncios...",
+    "placeholderChat": "Responda aqui...",
+    "thinking": "Pensando...",
+    "creatingAd": "Criando seu anúncio...",
+    "upload": "Enviar imagens do produto",
+    "analyzingSite": "Analisando seu site...",
+    "foundImages": "📸 Imagens de produto encontradas — toque para selecionar as que deseja usar:",
+    "useImages": "Usar {count} anúncios →",
+    "useImage": "Usar 1 anúncio →"
+  },
+  "welcome": {
+    "title": "AdForge",
+    "subtitle": "Transforme fotos do produto em anúncios profissionais. Sem precisar de design.",
+    "chipUpload": "Fazer upload de fotos",
+    "chipUrl": "Analisar site da marca"
+  },
+  "sidebar": {
+    "deleteSession": "Deletar"
+  },
+  "brand": {
+    "title": "Brand DNA"
+  },
+  "templateGallery": {
+    "title": "Escolha um Formato de Anúncio",
+    "subtitle": "Selecione a categoria de template que deseja gerar a seguir"
+  }
+}
