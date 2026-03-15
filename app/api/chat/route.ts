@@ -477,10 +477,16 @@ function extractUrls(text: string): string[] {
   });
 }
 
-async function fetchPageContent(url: string): Promise<string | null> {
+interface PageAnalysis {
+  text: string;
+  imageUrls: string[];
+  ogImage: string;
+}
+
+async function fetchPageContent(url: string): Promise<PageAnalysis | null> {
   try {
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 10000); // 10s timeout
+    const timeout = setTimeout(() => controller.abort(), 10000);
 
     const res = await fetch(url, {
       signal: controller.signal,
@@ -565,7 +571,13 @@ async function fetchPageContent(url: string): Promise<string | null> {
     // Extract product price if present
     const priceMatches = html.match(/R\$\s*[\d.,]+|\$\s*[\d.,]+/g) || [];
 
-    return `WEBSITE ANALYSIS FOR: ${url}
+    // Collect all candidate image URLs (OG image first, then page images)
+    const allImageUrls: string[] = [];
+    if (ogImage) allImageUrls.push(ogImage.startsWith("http") ? ogImage : new URL(url).origin + ogImage);
+    allImageUrls.push(...pageImages);
+    const uniqueImageUrls = [...new Set(allImageUrls)].slice(0, 5);
+
+    const analysisText = `WEBSITE ANALYSIS FOR: ${url}
 
 Title: ${title}
 OG Title: ${ogTitle}
@@ -581,14 +593,58 @@ Colors found in external CSS: ${allCssColors.join(", ")}
 CSS custom properties (brand colors): ${cssVars.join(", ")}
 
 Product images found on page:
-${pageImages.map((img) => "- " + img).join("\n")}
+${uniqueImageUrls.map((img) => "- " + img).join("\n")}
 
 Prices found: ${priceMatches.slice(0, 5).join(", ")}
 
 Page content (excerpt):
 ${bodyText}`;
+
+    return {
+      text: analysisText,
+      imageUrls: uniqueImageUrls,
+      ogImage,
+    };
   } catch (err) {
     console.error("[URL Fetch Error]", url, err);
+    return null;
+  }
+}
+
+/**
+ * Download an image from a URL and return it as base64 with mime type.
+ * Returns null if the download fails or the image is too large (>4MB).
+ */
+async function downloadImageAsBase64(imageUrl: string): Promise<{ data: string; mimeType: string } | null> {
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000);
+
+    const res = await fetch(imageUrl, {
+      signal: controller.signal,
+      headers: {
+        "User-Agent": "Mozilla/5.0 (compatible; AdForge/1.0; bot)",
+        "Accept": "image/*",
+      },
+    });
+    clearTimeout(timeout);
+
+    if (!res.ok) return null;
+
+    const contentType = res.headers.get("content-type") || "image/jpeg";
+    if (!contentType.startsWith("image/")) return null;
+
+    const buffer = await res.arrayBuffer();
+    // Skip images larger than 4MB (Gemini limit)
+    if (buffer.byteLength > 4 * 1024 * 1024) return null;
+    // Skip tiny images (likely tracking pixels / spacers)
+    if (buffer.byteLength < 1000) return null;
+
+    const base64 = Buffer.from(buffer).toString("base64");
+    const mimeType = contentType.split(";")[0].trim();
+
+    return { data: base64, mimeType };
+  } catch {
     return null;
   }
 }
@@ -679,15 +735,38 @@ export async function POST(req: NextRequest) {
       textContent += `\n[User selected format: ${selectedFormat}]`;
     }
 
-    // ── URL Detection: fetch page content for brand analysis ──
+    // ── URL Detection: fetch page content + product images for brand analysis ──
     const urls = extractUrls(lastMessage.content);
     if (urls.length > 0) {
       const fetchResults = await Promise.all(
         urls.slice(0, 2).map((url) => fetchPageContent(url))
       );
-      const validResults = fetchResults.filter(Boolean);
+      const validResults = fetchResults.filter((r): r is PageAnalysis => r !== null);
       if (validResults.length > 0) {
-        textContent += "\n\n[SYSTEM: The following website content was fetched for brand analysis. Use this data to extract brand_name, product_name, colors, typography, tone, audience, positioning, and key_benefits. Present the analysis to the user as a friendly Brand DNA summary.]\n\n" + validResults.join("\n\n---\n\n");
+        // Collect all image URLs from all analyzed pages
+        const allImageUrls = validResults.flatMap((r) => r.imageUrls);
+        const uniqueImageUrls = [...new Set(allImageUrls)].slice(0, 3);
+
+        // Download product images and inject as inlineData so the model can SEE them
+        if (uniqueImageUrls.length > 0) {
+          console.log(`[AdForge] 📸 Downloading ${uniqueImageUrls.length} product images from page...`);
+          const imageResults = await Promise.all(
+            uniqueImageUrls.map((imgUrl) => downloadImageAsBase64(imgUrl))
+          );
+          const validImages = imageResults.filter((img): img is { data: string; mimeType: string } => img !== null);
+          
+          if (validImages.length > 0) {
+            console.log(`[AdForge] ✅ Downloaded ${validImages.length} product images for visual analysis`);
+            // Inject images BEFORE the text so the model sees them first
+            validImages.forEach((img) => {
+              currentParts.push({
+                inlineData: { data: img.data, mimeType: img.mimeType },
+              });
+            });
+          }
+        }
+
+        textContent += "\n\n[SYSTEM: The following website content was fetched for brand analysis. Product images from the page have been attached above — ANALYZE THEM VISUALLY to extract the real brand colors, packaging design, product appearance, and visual identity. Use BOTH the visual analysis AND the text data below to build an accurate Brand DNA. Do NOT guess colors — extract them from the actual product images.]\n\n" + validResults.map((r) => r.text).join("\n\n---\n\n");
       } else {
         textContent += "\n\n[SYSTEM: URL fetch failed. Tell the user you couldn't read their website and transition to Path A — ask them manually about their brand, starting with colors.]";
       }
