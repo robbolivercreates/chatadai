@@ -48,6 +48,14 @@ export async function POST(req: NextRequest) {
 
     const result = await model.generateContent({
       contents: [{ role: "user", parts }],
+      tools: [{
+        googleSearch: {
+          searchTypes: {
+            webSearch: {},
+            imageSearch: {},
+          },
+        },
+      }],
       generationConfig: {
         responseModalities: ["TEXT", "IMAGE"],
         imageConfig: {
