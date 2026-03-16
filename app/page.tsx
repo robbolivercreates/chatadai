@@ -544,7 +544,7 @@ export default function Home() {
                 <MessageBubble
                   key={msg.id}
                   message={msg}
-                  onRegenerate={() => sendMessage("Quero gerar esse anúncio de novo com uma variação diferente")}
+                  onRegenerate={() => sendMessage("Quero outra variação deste mesmo template")}
                   sendMessage={sendMessage}
                   isDevMode={isDevMode}
                   onImagesSelected={(selectedImages) => {
