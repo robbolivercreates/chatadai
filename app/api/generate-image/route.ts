@@ -38,7 +38,12 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    parts.push({ text: prompt });
+    // We need to explicitly instruct the model to use the attached image as the subject
+    let finalPromptText = prompt;
+    if (images && images.length > 0) {
+       finalPromptText = `[SYSTEM INSTRUCTION: You MUST use the attached image as the visual reference for the central product (Subject Reference). Maintain its exact shape, colors, and label design. Do not hallucinate generic objects in its place.]\n\n${prompt}`;
+    }
+    parts.push({ text: finalPromptText });
 
     // Map format to aspect ratio
     const formatToAspect: Record<string, string> = {
@@ -55,15 +60,20 @@ export async function POST(req: NextRequest) {
             imageSearch: {},
           },
         },
-      }],
+      }] as any,
       generationConfig: {
-        responseModalities: ["TEXT", "IMAGE"],
+        responseModalities: ["IMAGE"],
         imageConfig: {
           imageSize: "1K",
           aspectRatio,
         },
-      },
-    } as any);
+      } as any, // Using `as any` because the experimental SDK typings are missing `aspectRatio`, but it is supported by the backend
+    });
+
+    // The backend uses `aspectRatio` in generationConfig, but as of now the SDK typings are spotty.
+    // If the above `as any` still drops it, we inject it directly into the prompt as a fallback instruction.
+    const promptWithRatio = `${parts[parts.length - 1].text}\n\nCRITICAL SYSTEM REQUIREMENT: Generate exactly in ${aspectRatio} aspect ratio. DO NOT ignore this format.`;
+    parts[parts.length - 1].text = promptWithRatio;
 
     const response = result.response;
     const candidates = response.candidates?.[0]?.content?.parts || [];

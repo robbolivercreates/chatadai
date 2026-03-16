@@ -11,6 +11,7 @@ interface Props {
   message: ChatMessage;
   onRegenerate?: (msgId: string) => void;
   sendMessage?: (text: string) => void;
+  isDevMode?: boolean;
   onImagesSelected?: (images: { data: string; mimeType: string }[]) => void;
 }
 
@@ -19,6 +20,7 @@ function renderPart(
   msgId: string,
   onRegenerate?: (msgId: string) => void,
   sendMessage?: (text: string) => void,
+  isDevMode?: boolean,
   onImagesSelected?: (images: { data: string; mimeType: string }[]) => void,
 ) {
   switch (part.type) {
@@ -46,7 +48,7 @@ function renderPart(
       return null;
 
     case "template_gallery":
-      return <TemplateGallery key="template-gallery" sendMessage={sendMessage || (() => {})} />;
+      return <TemplateGallery key="template-gallery" sendMessage={sendMessage || (() => {})} isDevMode={isDevMode} />;
 
     case "scraped_images":
       return (
@@ -66,7 +68,7 @@ function renderPart(
   }
 }
 
-export function MessageBubble({ message, onRegenerate, sendMessage, onImagesSelected }: Props) {
+export function MessageBubble({ message, onRegenerate, sendMessage, isDevMode, onImagesSelected }: Props) {
   const isUser = message.role === "user";
 
   if (isUser) {
@@ -101,6 +103,19 @@ export function MessageBubble({ message, onRegenerate, sendMessage, onImagesSele
     );
   }
 
+  // Check if this is a gallery message - render full-width without avatar constraint
+  const isGalleryMessage = message.parts?.some(p => p.type === "template_gallery");
+
+  if (isGalleryMessage) {
+    return (
+      <div className="w-full px-2 py-1">
+        {message.parts!.map((part, i) => (
+          <div key={i}>{renderPart(part, message.id, onRegenerate, sendMessage, isDevMode, onImagesSelected)}</div>
+        ))}
+      </div>
+    );
+  }
+
   // Assistant message
   return (
     <div className="flex gap-3 px-4 py-1 max-w-[82%]">
@@ -115,7 +130,7 @@ export function MessageBubble({ message, onRegenerate, sendMessage, onImagesSele
       <div className="flex flex-col gap-3 min-w-0 flex-1">
         {message.parts && message.parts.length > 0 ? (
           message.parts.map((part, i) => (
-            <div key={i}>{renderPart(part, message.id, onRegenerate, sendMessage, onImagesSelected)}</div>
+            <div key={i}>{renderPart(part, message.id, onRegenerate, sendMessage, isDevMode, onImagesSelected)}</div>
           ))
         ) : (
           <div className="prose prose-invert prose-sm max-w-none text-[14px] leading-relaxed">

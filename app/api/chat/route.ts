@@ -11,6 +11,9 @@ const LAYER_1_PERSONA = `You are AdForge, an expert AI creative director special
 
 Your job is to guide users through creating high-converting ad creatives for Meta Ads, TikTok, and Google Display — from a simple product photo to a finished, ready-to-deploy image ad.
 
+
+Your job is to guide users through creating high-converting ad creatives for Meta Ads, TikTok, and Google Display — from a simple product photo to a finished, ready-to-deploy image ad.
+
 PERSONALITY:
 - Warm, direct, and confident. You sound like a senior creative strategist who has seen thousands of ads.
 - You never use jargon without explaining it. You speak plainly.
@@ -29,7 +32,12 @@ CRITICAL RULES:
 - You NEVER mention "Brand DNA", "template variables", "aspect ratio parameters", or any internal system terminology. Speak like a creative director, not a developer.
 - You NEVER make up statistics, review counts, or claims about the user's brand. If you need a stat, ask.
 - You ask ONE question at a time. Never stack multiple questions in a single message.
-- You keep your messages short. Use line breaks. Use bold sparingly for emphasis. Use bullet lists only when presenting choices.`;
+- You keep your messages short. Use line breaks. Use bold sparingly for emphasis. Use bullet lists only when presenting choices.
+
+CRITICAL AD CREATION STANDARDS (AGENCY LEVEL):
+- ABSOLUTE LANGUAGE LOCK: ALL copy inside ads — headlines, subheads, CTAs, review text, benefit bullets, badge text — MUST match the session language. PT-BR session = every word in the ad must be Brazilian Portuguese. Zero exceptions.
+- REAL-LIFE CONTEXT REQUIRED: Every image prompt MUST place the product in a real human situation. Energy drink → gym athlete, can in hand, post-workout. Skincare → morning bathroom, dropper over palm. Shoes → street action shot. Never use a floating product on a plain gradient — that is a failure.
+- BENEFITS ARE THE HEADLINE: Minimum 2 specific benefits from brand_dna.key_benefits MUST appear as visible copy in the ad. Never use generic placeholders like "Premium Quality" unless they come from the brand verbatim.`;
 
 // ─────────────────────────────────────────────────────────────────
 // LAYER 2 — INSTRUCTIONS (STATE MACHINE)
@@ -282,7 +290,8 @@ Output this EXACT format (JSON inside a generate_ad code fence):
 RULES FOR generate_ad:
 - You MUST include this block. Without it, no image is generated.
 - Fill ALL variables from the template. Use Brand DNA values for brand_dna vars, your generated copy for ai_copy vars, and the user's answers for user_input vars.
-- If a user_input variable hasn't been collected yet, ASK for it BEFORE outputting the generate_ad block.
+- If the template requires variables like [BENEFITS], [DIFERENCIAIS], or [VALUE ADDS], you MUST map them directly from the Brand DNA 'key_benefits' list. Do NOT leave them blank.
+- NEVER use lorem ipsum, placeholders, or empty values. If the template needs a value, you must generate a persuasive copy or pull it from the Brand DNA.
 - For the format, if the user hasn't explicitly chosen one, default to the template's recommended format or "4:5".
 - The generate_ad block MUST be valid JSON.
 
@@ -531,7 +540,7 @@ async function fetchPageContent(url: string): Promise<PageAnalysis | null> {
         return "";
       })
       .filter((src) => src && !src.includes("icon") && !src.includes("favicon") && !src.includes("logo"))
-      .slice(0, 5);
+      .slice(0, 15);
 
     // Extract useful content from HTML
     const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
@@ -579,7 +588,7 @@ async function fetchPageContent(url: string): Promise<PageAnalysis | null> {
     const allImageUrls: string[] = [];
     if (ogImage) allImageUrls.push(ogImage.startsWith("http") ? ogImage : new URL(url).origin + ogImage);
     allImageUrls.push(...pageImages);
-    const uniqueImageUrls = [...new Set(allImageUrls)].slice(0, 5);
+    const uniqueImageUrls = [...new Set(allImageUrls)].slice(0, 15);
 
     const analysisText = `WEBSITE ANALYSIS FOR: ${url}
 
@@ -751,7 +760,7 @@ export async function POST(req: NextRequest) {
       if (validResults.length > 0) {
         // Collect all image URLs from all analyzed pages
         const allImageUrls = validResults.flatMap((r) => r.imageUrls);
-        const uniqueImageUrls = [...new Set(allImageUrls)].slice(0, 3);
+        const uniqueImageUrls = [...new Set(allImageUrls)].slice(0, 8);
 
         // Download product images and inject as inlineData so the model can SEE them
         if (uniqueImageUrls.length > 0) {
@@ -817,7 +826,8 @@ export async function POST(req: NextRequest) {
 
         // --- SERVER-SIDE PROMPT ASSEMBLY ---
         let fullPrompt = "";
-        const template = getTemplate(adReq.templateId);
+        const templateLanguage = language || "pt";
+        const template = getTemplate(adReq.templateId, templateLanguage as "pt" | "en");
 
         if (template && adReq.variables) {
           // Build variables map: merge agent-provided + brand DNA auto-fills
@@ -882,7 +892,9 @@ export async function POST(req: NextRequest) {
         const imageParts: Part[] = [];
 
         // Include product images if available
+        let hasImages = false;
         if (images && images.length > 0) {
+          hasImages = true;
           images.forEach((img) => {
             imageParts.push({
               inlineData: { data: img.data, mimeType: img.mimeType },
@@ -890,7 +902,18 @@ export async function POST(req: NextRequest) {
           });
         }
 
-        imageParts.push({ text: fullPrompt });
+        // We MUST explicitly instruct the model to use the attached image as the subject,
+        // otherwise it will hallucinate unrelated objects.
+        let subjectInstruction = "";
+        let finalProductName = brandDNA?.product_name || "the product";
+
+        if (hasImages) {
+           subjectInstruction = `[CRITICAL SYSTEM INSTRUCTION: You MUST use the attached image as the EXCLUSIVE visual reference for the central product (Subject Reference). The product is: "${finalProductName}". Maintain its EXACT shape, colors, and label design. DO NOT hallucinate generic objects in its place. DO NOT replace it with other items.]\n\n`;
+        } else {
+           subjectInstruction = `[CRITICAL SYSTEM INSTRUCTION: Render the product "${finalProductName}" accurately based on its description.]\n\n`;
+        }
+
+        imageParts.push({ text: subjectInstruction + fullPrompt });
 
         // Map ad format to aspect ratio for imageConfig
         const formatToAspect: Record<string, string> = {
@@ -907,9 +930,9 @@ export async function POST(req: NextRequest) {
                 imageSearch: {},
               },
             },
-          }],
+          }] as any,
           generationConfig: {
-            responseModalities: ["TEXT", "IMAGE"],
+            responseModalities: ["IMAGE"],
             imageConfig: {
               imageSize: "1K",
               aspectRatio,

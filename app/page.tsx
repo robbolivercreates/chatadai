@@ -27,6 +27,9 @@ export default function Home() {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
+  // Modos Root
+  const [isDevMode, setIsDevMode] = useState(false);
+
   const tChat = useTranslations("chat");
   const tWelcome = useTranslations("welcome");
   const tSidebar = useTranslations("sidebar");
@@ -61,6 +64,7 @@ export default function Home() {
     setShowFormatSelector(false);
     setUploadedImages([]);
     productImagesRef.current = []; // Reset product images on session switch
+    setIsDevMode(false); // Reset dev mode on session switch
   }, [activeChatId]);
 
   // Persist messages
@@ -142,6 +146,26 @@ export default function Home() {
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
     setUploadedImages([]);
+    setInput("");
+    
+    // Developer Mode Intercept
+    const trimmedInput = trimmed.toLowerCase();
+    if (trimmedInput === "/dev-mode" || trimmedInput === "/galeria-completa") {
+      setIsDevMode(true);
+      const startMsg: ChatMessage = {
+        id: generateId(),
+        role: "assistant",
+        content: `[TEMPLATE_GALLERY]`,
+        parts: [{ type: "template_gallery" }],
+        timestamp: Date.now(),
+      };
+      setMessages((prev) => [...prev, startMsg]);
+      setIsLoading(false); // Ensure loading is off if we intercept
+      setLoadingLabel(tChat("thinking")); // Reset label
+      setShowFormatSelector(false); // Reset selector
+      return;
+    }
+
     setIsLoading(true);
     setLoadingLabel(tChat("thinking"));
     setShowFormatSelector(false);
@@ -255,7 +279,8 @@ export default function Home() {
 
   const handleFormatSelect = (format: AdFormat) => {
     setSelectedFormat(format);
-    sendMessage(`Format: ${format}`);
+    const msg = language === "pt" ? `Formato da imagem: ${format}` : `Format: ${format}`;
+    sendMessage(msg);
   };
 
   const handleNewChat = () => {
@@ -265,6 +290,7 @@ export default function Home() {
     setSelectedFormat(null);
     setShowFormatSelector(false);
     setInput("");
+    setIsDevMode(false); // Reset on new chat
     productImagesRef.current = []; // Clear product images
   };
 
@@ -443,7 +469,9 @@ export default function Home() {
                 <MessageBubble
                   key={msg.id}
                   message={msg}
+                  onRegenerate={() => {}}
                   sendMessage={sendMessage}
+                  isDevMode={isDevMode}
                   onImagesSelected={(selectedImages) => {
                     // Store selected product images for ad generation
                     const asUploaded = selectedImages.map((img) => ({
@@ -452,7 +480,10 @@ export default function Home() {
                       preview: `data:${img.mimeType};base64,${img.data.slice(0, 100)}`,
                     }));
                     productImagesRef.current = asUploaded;
-                    sendMessage(`I've selected ${selectedImages.length} product image${selectedImages.length > 1 ? "s" : ""} to use for my ads.`);
+                    const msg = language === "pt"
+                      ? `Selecionei ${selectedImages.length} imagem(ns) de produto para usar nos meus anúncios.`
+                      : `I've selected ${selectedImages.length} product image${selectedImages.length > 1 ? "s" : ""} to use for my ads.`;
+                    sendMessage(msg);
                   }}
                 />
               ))}

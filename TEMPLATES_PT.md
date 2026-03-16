@@ -2267,18 +2267,18 @@ Use the attached images as brand reference. Create: a trust-driven ad on clean w
 
 ---
 
-### Template 65 — Tela de Produto Estilo Mercado Livre / Shopee
+### Template 65 — Tela de Produto E-commerce Moderna
 
 ```yaml
 id: 65
 category: G
-name: Tela de Produto Estilo Mercado Livre / Shopee
-strategy_note: Simula listagem de marketplace. Familiaridade com a UI = confianca imediata.
+name: Tela de Produto E-commerce Moderna
+strategy_note: Simula uma página de produto clean e de alta conversão. A familiaridade com a UI de compra digital traz confiança imediata.
 formats: ['4:5', '1:1']
 recommended_format: 4:5
 variables:
-  - key: COR
-    fill: ai_copy
+  - key: COR DA MARCA
+    fill: brand_dna
   - key: SEU PRODUTO
     fill: brand_dna
   - key: PRECO
@@ -2297,7 +2297,7 @@ variables:
 
 **Prompt:**
 ```
-Use the attached images as brand reference. Create: a static ad that mimics a Mercado Livre product listing page. Top: simplified marketplace header bar in [COR like amarelo ML #FFE600 / laranja Shopee] with search bar. Below: [SEU PRODUTO] large product photo on white, clean, studio-lit. To the right: large bold black text "R$[PRECO]" with green badge "[PARCELAS like 12x R$9,90 sem juros]". Below price: small green text "Frete gratis" with truck icon. Star rating: [NUMERO] filled gold stars with "([CONTAGEM] avaliacoes)". "Vendido por [MARCA]" with blue verified seller checkmark and "[STATUS like MercadoLider Gold]" in green. Below: green CTA button "Comprar agora". The entire layout should feel like a real marketplace listing — the familiarity IS the trust mechanism. Do NOT add any branding outside the listing UI. 4:5 aspect ratio.
+Use the attached images as brand reference. Create: a static ad that mimics a modern, generic e-commerce product page. Top: simplified storefront header bar with a small search field and a shopping cart icon. Below: [SEU PRODUTO] large product photo centered on a clean white studio background. To the right or below (depending on aspect ratio): large bold solid text "R$[PRECO]" with an accent badge "[PARCELAS like 12x R$9,90 sem juros]". Below price: small green text "Frete grátis" with a delivery truck icon. Star rating: [NUMERO] filled gold stars with "([CONTAGEM] avaliações)". Text "Vendido por [MARCA]" with a verified checkmark and "[STATUS like Loja Oficial]" in green. Below: prominent CTA button "Comprar agora" in [COR DA MARCA] or a high-contrast accent color. The entire layout should feel like a perfectly designed, high-converting checkout/product page interface. Do NOT use specific marketplace colors (like yellow or orange) unless they are the actual [COR DA MARCA]. 4:5 aspect ratio.
 ```
 
 ---
@@ -2849,3 +2849,1165 @@ Use the attached images as brand reference. Create: a WhatsApp-CTA ad on [COR DE
 
 ---
 
+
+
+## Category G — Infoprodutos & Mercado Digital (PT-BR Exclusivo)
+
+## Category G — Infoprodutos & Mercado Digital
+
+> Templates criados especificamente para o mercado digital brasileiro: infoprodutores, coaches, mentores, gestores de tráfego, criadores de cursos e prestadores de serviços digitais. Fluxo adaptado — em vez de foto de produto físico, o agente solicita foto do expert, prints de resultado ou mockup de curso.
+
+---
+
+### Template 81 — Resultado de Aluno
+
+```yaml
+id: 81
+category: G
+name: Resultado de Aluno
+strategy_note: O depoimento com rosto é o criativo mais poderoso do mercado digital brasileiro. Resultado real + foto humaniza e prova. Use quando tiver um aluno com resultado específico e mensurável.
+formats: [4:5, 1:1]
+recommended_format: 4:5
+variables:
+  - key: BRAND COLOR
+    fill: brand_dna
+  - key: STUDENT DESCRIPTION
+    fill: user_input
+    note: Descreva o aluno — gênero, faixa etária, contexto, e.g. "mulher sorrindo, em home office, luz natural"
+  - key: RESULT ACHIEVED
+    fill: user_input
+    note: Resultado exato e mensurável, e.g. "Faturei R$12.000 no primeiro mês"
+  - key: STUDENT NAME
+    fill: user_input
+    note: Primeiro nome + inicial do sobrenome + cidade, e.g. "Ana R., São Paulo"
+  - key: TRANSFORMATION HOOK
+    fill: ai_copy
+    note: Headline de transformação, e.g. "Ela não sabia nada de tráfego pago. Hoje vive disso."
+  - key: BRAND
+    fill: brand_dna
+  - key: COURSE NAME
+    fill: brand_dna
+    note: Nome do curso ou produto digital
+```
+
+**Prompt:**
+```
+Use the attached images as brand reference. Match exact brand colors and tone precisely. Create: a static ad on a clean white or [BRAND COLOR light] background. Top 60%: a casual, warm photo of [STUDENT DESCRIPTION]. Overlaid on the photo: a white rounded-rectangle result card with subtle shadow showing "[RESULT ACHIEVED]" in large bold [BRAND COLOR] sans-serif, with "[STUDENT NAME]" in smaller regular weight below. Bottom 40%: bold black sans-serif copy reading "[TRANSFORMATION HOOK]". Below: [BRAND] logo + "[COURSE NAME]" in small caps. [FORMAT] aspect ratio.
+```
+
+---
+
+### Template 82 — Autoridade do Expert
+
+```yaml
+id: 82
+category: G
+name: Autoridade do Expert
+strategy_note: No mercado digital, quem compra está comprando o expert, não o produto. A foto com credenciais faz todo o trabalho. Use para topo de funil em audiência fria que não conhece o produtor.
+formats: [4:5, 1:1]
+recommended_format: 4:5
+variables:
+  - key: EXPERT DESCRIPTION
+    fill: user_input
+    note: Descreva o expert — gênero, faixa etária, estilo, e.g. "homem, 40 anos, camisa social, olhar direto"
+  - key: EXPERT NAME
+    fill: brand_dna
+  - key: CREDENTIAL 1
+    fill: user_input
+    note: e.g. "+7 anos de experiência"
+  - key: CREDENTIAL 2
+    fill: user_input
+    note: e.g. "+2.000 alunos formados"
+  - key: CREDENTIAL 3
+    fill: user_input
+    note: e.g. "Ex-Google · Hoje fatura 7 dígitos"
+  - key: AUTHORITY STATEMENT
+    fill: ai_copy
+    note: Frase de autoridade pessoal, e.g. "Eu aprendi do jeito difícil. Você não precisa."
+  - key: BRAND COLOR
+    fill: brand_dna
+  - key: ACCENT COLOR
+    fill: brand_dna
+  - key: COURSE NAME
+    fill: brand_dna
+```
+
+**Prompt:**
+```
+Use the attached images as brand reference. Create: an authority-building ad. Left 55%: a confident, professional portrait photo of [EXPERT DESCRIPTION] — shot on 50mm f/1.8, warm studio lighting. NOT a stock photo feel — personal and real. Right 45%: clean [BRAND COLOR] background. Top: [EXPERT NAME] in bold white sans-serif. Below: 3 credential lines in smaller white regular weight: "[CREDENTIAL 1]", "[CREDENTIAL 2]", "[CREDENTIAL 3]". Center: bold italic white pull-quote: "[AUTHORITY STATEMENT]". Bottom: [COURSE NAME] pill badge in [ACCENT COLOR]. [FORMAT] aspect ratio.
+```
+
+---
+
+### Template 83 — Antes/Depois de Vida
+
+```yaml
+id: 83
+category: G
+name: Antes/Depois de Vida
+strategy_note: O antes/depois do mercado digital não é físico — é situação de vida, renda, liberdade. Divide o frame em dois estados emocionais opostos. Muito eficaz para audiências que já tentaram e falharam.
+formats: [1:1, 4:5]
+recommended_format: 1:1
+variables:
+  - key: PERSON
+    fill: user_input
+    note: Descrição da pessoa no cenário, e.g. "profissional cansado em escritório com iluminação fria"
+  - key: BEFORE STATE
+    fill: ai_copy
+    note: Data ou label do estado anterior, e.g. "Janeiro de 2023"
+  - key: PAIN POINT
+    fill: user_input
+    note: Situação específica de dor, e.g. "CLT, 40h/semana, R$3.200/mês"
+  - key: AFTER STATE
+    fill: ai_copy
+    note: Data ou label do estado posterior, e.g. "Janeiro de 2024"
+  - key: RESULT
+    fill: user_input
+    note: Resultado específico, e.g. "Home office, 4h/dia, R$18.000/mês"
+  - key: BRAND
+    fill: brand_dna
+  - key: TRANSFORMATION LINE
+    fill: ai_copy
+    note: Linha de rodapé que conecta os dois estados, e.g. "O que mudou? Um método."
+```
+
+**Prompt:**
+```
+Use the attached images as brand reference. Create: a split-panel life transformation ad. Hard vertical divide at center. LEFT PANEL: dark, desaturated. [PERSON]. White text overlay top: "[BEFORE STATE]". Small caption: "[PAIN POINT]". RIGHT PANEL: same person, bright, saturated, warm — relaxed expression, laptop on a café table or home setup, natural light. White text overlay top: "[AFTER STATE]". Small caption: "[RESULT]". Bottom center spanning both panels: [BRAND] logo + bold text: "[TRANSFORMATION LINE]". [FORMAT] aspect ratio.
+```
+
+---
+
+### Template 84 — Mockup de Curso
+
+```yaml
+id: 84
+category: G
+name: Mockup de Curso
+strategy_note: Mostra o produto digital de forma tangível. Área de membros em dispositivos reais aumenta percepção de valor. Use para apresentar um curso ou produto digital pela primeira vez.
+formats: [4:5, 1:1]
+recommended_format: 4:5
+variables:
+  - key: BRAND COLOR
+    fill: brand_dna
+  - key: ACCENT COLOR
+    fill: brand_dna
+  - key: COURSE NAME
+    fill: brand_dna
+  - key: BENEFIT 1
+    fill: ai_copy
+    note: e.g. "+80 aulas"
+  - key: BENEFIT 2
+    fill: ai_copy
+    note: e.g. "Suporte vitalício"
+  - key: BENEFIT 3
+    fill: ai_copy
+    note: e.g. "Certificado incluído"
+  - key: EXPERT NAME
+    fill: brand_dna
+  - key: STUDENT COUNT
+    fill: user_input
+    note: Número de alunos, e.g. "+3.200 alunos"
+  - key: CTA
+    fill: ai_copy
+    note: e.g. "Quero me inscrever"
+```
+
+**Prompt:**
+```
+Use the attached images as brand reference. Match exact brand colors and typography. Create: a product showcase ad for a digital course. Background: [BRAND COLOR] gradient or solid, clean. Center: a realistic mockup of 2-3 devices — laptop, tablet and phone — each showing a clean screenshot of a professional course platform with video player, lesson list and progress bar visible. Devices arranged in a natural overlapping composition, slightly angled. Top: bold white sans-serif headline: "[COURSE NAME]" in large text. Below headline: 3 benefit pills in [ACCENT COLOR]: "[BENEFIT 1]" · "[BENEFIT 2]" · "[BENEFIT 3]". Bottom: "[EXPERT NAME]" + star rating + "[STUDENT COUNT]". CTA button: "[CTA]" in [ACCENT COLOR]. [FORMAT] aspect ratio.
+```
+
+---
+
+### Template 85 — Print de WhatsApp
+
+```yaml
+id: 85
+category: G
+name: Print de WhatsApp
+strategy_note: Print de conversa de WhatsApp é o formato mais nativo e de maior credibilidade do mercado digital brasileiro. Parece orgânico. Use depoimentos reais de alunos com resultados específicos e mensuráveis.
+formats: [4:5, 9:16]
+recommended_format: 4:5
+variables:
+  - key: STUDENT NAME
+    fill: user_input
+    note: Nome real do aluno, e.g. "Ana Lima"
+  - key: GENUINE TESTIMONIAL
+    fill: user_input
+    note: 2-3 mensagens reais de WhatsApp com resultado, tom conversacional, emojis. Cada mensagem separada por " / "
+  - key: BRAND
+    fill: brand_dna
+  - key: WEBSITE
+    fill: brand_dna
+```
+
+**Prompt:**
+```
+Use the attached images as brand reference for tone ONLY. This must look completely organic. Create: a static ad mimicking a real WhatsApp screenshot. Light gray background (#ECE5DD WhatsApp default). Top: realistic WhatsApp chat header with contact name "[STUDENT NAME]", green online indicator, back arrow, video and call icons. Chat bubbles showing incoming messages (white, left aligned): "[GENUINE TESTIMONIAL]" — each message as a separate bubble with time stamps visible (e.g. "14:32 ✓✓"). Bottom of screen: WhatsApp input bar with microphone and attachment icons. Very bottom outside the screenshot: small plain text "[BRAND] · [WEBSITE]". No brand logo inside the screenshot. [FORMAT] aspect ratio.
+```
+
+---
+
+### Template 86 — Oferta de Lançamento
+
+```yaml
+id: 86
+category: G
+name: Oferta de Lançamento
+strategy_note: Formato clássico de lançamento brasileiro. Urgência + bônus empilhados + garantia. Altíssima conversão em período de carrinho aberto. Use somente durante períodos de lançamento ou promoção ativa.
+formats: [4:5, 9:16]
+recommended_format: 4:5
+variables:
+  - key: BRAND COLOR
+    fill: brand_dna
+  - key: ACCENT COLOR
+    fill: brand_dna
+  - key: LAUNCH HEADLINE
+    fill: ai_copy
+    note: e.g. "ÚLTIMA CHANCE" ou "CARRINHO ABERTO"
+  - key: TIME
+    fill: user_input
+    note: Tempo restante, e.g. "02:47:33"
+  - key: COURSE NAME
+    fill: brand_dna
+  - key: PRICE
+    fill: user_input
+    note: e.g. "De R$997 por apenas R$297"
+  - key: BONUS 1
+    fill: user_input
+    note: Nome e valor do bônus 1
+  - key: BONUS 2
+    fill: user_input
+    note: Nome e valor do bônus 2
+  - key: BONUS 3
+    fill: user_input
+    note: Nome e valor do bônus 3
+  - key: GUARANTEE
+    fill: user_input
+    note: e.g. "7 dias de garantia incondicional"
+  - key: CTA
+    fill: ai_copy
+    note: e.g. "QUERO GARANTIR MINHA VAGA"
+```
+
+**Prompt:**
+```
+Use the attached images as brand reference. Match exact brand colors. Create: a launch offer ad on a deep [BRAND COLOR] background. Top: bold white all-caps headline: "[LAUNCH HEADLINE]". Below: large [ACCENT COLOR] countdown timer graphic reading "[TIME]" with labels "HORAS · MINUTOS · SEGUNDOS". Center: [COURSE NAME] in large white bold text + "[PRICE]" with original price in strikethrough. Below price: stacked bonus list with checkmark emojis: "✅ Bônus 1: [BONUS 1]", "✅ Bônus 2: [BONUS 2]", "✅ Bônus 3: [BONUS 3]". Bottom: guarantee badge "[GUARANTEE]" + CTA button "[CTA]" in [ACCENT COLOR]. [FORMAT] aspect ratio.
+```
+
+---
+
+### Template 87 — Prova Social em Números
+
+```yaml
+id: 87
+category: G
+name: Prova Social em Números
+strategy_note: Números grandes criam credibilidade instantânea. Melhor para topo de funil em audiências frias que ainda não conhecem o expert. Use quando tiver estatísticas reais e verificáveis.
+formats: [1:1, 4:5]
+recommended_format: 1:1
+variables:
+  - key: BRAND COLOR
+    fill: brand_dna
+  - key: ACCENT COLOR
+    fill: brand_dna
+  - key: STAT 1
+    fill: user_input
+    note: e.g. "+12.400"
+  - key: LABEL 1
+    fill: user_input
+    note: e.g. "alunos formados"
+  - key: STAT 2
+    fill: user_input
+    note: e.g. "R$47M"
+  - key: LABEL 2
+    fill: user_input
+    note: e.g. "gerados pelos alunos"
+  - key: STAT 3
+    fill: user_input
+    note: e.g. "4,9/5"
+  - key: LABEL 3
+    fill: user_input
+    note: e.g. "avaliação média"
+  - key: STAT 4
+    fill: user_input
+    note: e.g. "38"
+  - key: LABEL 4
+    fill: user_input
+    note: e.g. "países atendidos"
+  - key: HEADLINE
+    fill: ai_copy
+    note: e.g. "Os números falam por si"
+  - key: CTA
+    fill: ai_copy
+    note: e.g. "Quero fazer parte disso →"
+```
+
+**Prompt:**
+```
+Use the attached images as brand reference. Match exact brand colors and typography. Create: a social proof numbers ad on a [BRAND COLOR] background. Center: expert photo or logo. Surrounding in a clean grid layout, 4 large stat blocks: "[STAT 1]" in oversized bold white with "[LABEL 1]" below in smaller regular weight. "[STAT 2]" with "[LABEL 2]". "[STAT 3]" with "[LABEL 3]" and 5 gold stars. "[STAT 4]" with "[LABEL 4]". Each stat block in a thin [ACCENT COLOR] border radius card. Top: bold white headline "[HEADLINE]". Bottom: "[CTA]" button in [ACCENT COLOR]. [FORMAT] aspect ratio.
+```
+
+---
+
+### Template 88 — Método/Framework Visual
+
+```yaml
+id: 88
+category: G
+name: Método/Framework Visual
+strategy_note: Visualizar o método do expert em etapas reduz objeções e aumenta percepção de valor. Funciona muito bem para tráfego frio educacional. Use quando o diferencial do produto é o método em si.
+formats: [4:5, 1:1]
+recommended_format: 4:5
+variables:
+  - key: BRAND COLOR
+    fill: brand_dna
+  - key: METHOD NAME
+    fill: brand_dna
+    note: Nome do método ou framework
+  - key: RESULT
+    fill: ai_copy
+    note: Resultado final do método, e.g. "Faturar R$10k/mês"
+  - key: STEP 1
+    fill: user_input
+    note: Nome da etapa 1, e.g. "Diagnóstico"
+  - key: STEP 2
+    fill: user_input
+    note: Nome da etapa 2
+  - key: STEP 3
+    fill: user_input
+    note: Nome da etapa 3
+  - key: STEP 4
+    fill: user_input
+    note: Nome da etapa 4
+  - key: EXPERT NAME
+    fill: brand_dna
+  - key: TITLE
+    fill: user_input
+    note: Título do expert, e.g. "Especialista em Tráfego Pago"
+  - key: CTA
+    fill: ai_copy
+    note: e.g. "Aprenda o método completo"
+```
+
+**Prompt:**
+```
+Use the attached images as brand reference. Match exact brand colors. Create: a method visualization ad on a clean white or off-white background. Top: bold [BRAND COLOR] headline: "O Método [METHOD NAME]: As 4 Etapas Para [RESULT]". Center: a clean horizontal flow diagram with 4 steps, each in a [BRAND COLOR] numbered circle connected by arrows: Step 1: "[STEP 1]", Step 2: "[STEP 2]", Step 3: "[STEP 3]", Step 4: "[STEP 4]". Each step in its own clean card with [BRAND COLOR] icon. Bottom: expert photo small circular + "[EXPERT NAME] · [TITLE]" + "[CTA]". [FORMAT] aspect ratio.
+```
+
+---
+
+### Template 89 — Curiosity Gap Mercado Digital
+
+```yaml
+id: 89
+category: G
+name: Curiosity Gap Mercado Digital
+strategy_note: A pergunta que provoca — específica para as dores do mercado digital brasileiro. Sem produto visível. 100% curiosidade. Use para topo de funil frio com o objetivo de gerar clique e engajamento.
+formats: [1:1, 4:5]
+recommended_format: 1:1
+variables:
+  - key: PROVOCATIVE QUESTION
+    fill: ai_copy
+    note: Pergunta que toca na maior dor do avatar, específica e desconfortável
+  - key: PROBLEM VISUAL
+    fill: ai_copy
+    note: Descrição da cena que representa o problema, e.g. "pessoa cansada na frente do computador tarde da noite"
+```
+
+**Prompt:**
+```
+Use the attached images as brand reference for tone ONLY. Do NOT include any product or logo. Create: a curiosity-gap scroll-stopping ad. Clean white background. Top 40%: very large bold black condensed sans-serif text (heavy, tight leading): "[PROVOCATIVE QUESTION]". Last words followed by "...ver mais" in lighter gray — truncated caption style. Bottom 60%: a close-up, real, slightly uncomfortable photo of [PROBLEM VISUAL]. Shallow depth of field. No text on photo. No product. No logo. [FORMAT] aspect ratio.
+```
+
+---
+
+### Template 90 — Print de Dashboard de Vendas
+
+```yaml
+id: 90
+category: G
+name: Print de Dashboard de Vendas
+strategy_note: Print de plataforma de vendas desfocado com número em destaque. Aspira o avatar sem prometer nada explicitamente. Use para audiências de empreendedores digitais em fase de consideração.
+formats: [4:5, 9:16]
+recommended_format: 4:5
+variables:
+  - key: RESULT
+    fill: user_input
+    note: Valor em destaque, e.g. "R$ 47.832,00"
+  - key: TIMEFRAME
+    fill: user_input
+    note: Período do resultado, e.g. "em 30 dias"
+  - key: METHOD NAME
+    fill: brand_dna
+  - key: BRAND
+    fill: brand_dna
+  - key: WEBSITE
+    fill: brand_dna
+```
+
+**Prompt:**
+```
+Use the attached images as brand reference for tone ONLY. Create: an aspirational results ad. Background: slightly blurred screenshot of a sales dashboard (Hotmart or similar platform UI style — green numbers, transaction list, graphs visible). The blur is intentional — enough to read the layout, not the details. Center foreground: a large bold white number with currency: "[RESULT]" in oversized display font with subtle drop shadow for legibility. Below the number: small white text "[TIMEFRAME] · Método [METHOD NAME]". Bottom: clean white strip with [BRAND] logo and "Resultados variam. Este é um exemplo real de aluno." in tiny gray text. [FORMAT] aspect ratio.
+```
+
+---
+
+### Template 91 — Objeção Destruída
+
+```yaml
+id: 91
+category: G
+name: Objeção Destruída
+strategy_note: A objeção mais comum do avatar respondida diretamente. Copy pesado, sem imagem de produto. Muito eficaz para retargeting de quem viu a página mas não comprou. Use objeções reais coletadas em pesquisas com o público.
+formats: [1:1, 4:5]
+recommended_format: 1:1
+variables:
+  - key: TOP OBJECTION
+    fill: user_input
+    note: Objeção exata do avatar em primeira pessoa, e.g. "Mas eu não tenho tempo para fazer um curso online."
+  - key: REFRAME COPY
+    fill: ai_copy
+    note: 8-12 linhas curtas que derrubam a objeção, reformulam e fecham com confiança
+  - key: EXPERT NAME
+    fill: brand_dna
+  - key: COURSE NAME
+    fill: brand_dna
+  - key: CTA
+    fill: ai_copy
+```
+
+**Prompt:**
+```
+Use the attached images as brand reference. Match exact brand typography and tone. Create: a copy-dominant objection-crushing ad on clean white background. No product image — text IS the entire creative. Top: oversized bold black serif headline: "[TOP OBJECTION]" in quotation marks, large, taking up top 25%. Below: left-aligned body copy in short punchy lines NOT paragraphs: "[REFRAME COPY]". Bottom: expert photo small circular + [EXPERT NAME] + "[COURSE NAME]" + CTA button "[CTA]". [FORMAT] aspect ratio.
+```
+
+---
+
+### Template 92 — DM Instagram (Depoimento Nativo)
+
+```yaml
+id: 92
+category: G
+name: DM Instagram
+strategy_note: Mesmo princípio do WhatsApp mas no formato DM do Instagram. Alta credibilidade por parecer 100% orgânico. Use com resultados específicos e mensuráveis de alunos reais.
+formats: [4:5, 9:16]
+recommended_format: 4:5
+variables:
+  - key: STUDENT NAME
+    fill: user_input
+    note: Nome do aluno para o header do DM
+  - key: QUESTION SENT
+    fill: ai_copy
+    note: Mensagem enviada pelo expert, e.g. "Como foi o resultado do mês?"
+  - key: GENUINE RESULT MESSAGE
+    fill: user_input
+    note: 2-4 mensagens reais do aluno com resultado específico, conversacional, com emojis
+  - key: BRAND
+    fill: brand_dna
+  - key: WEBSITE
+    fill: brand_dna
+```
+
+**Prompt:**
+```
+Use the attached images as brand reference for tone ONLY. This must look exactly like an Instagram Direct Message screenshot. Create: realistic Instagram DM screenshot. White background. Top: Instagram DM header with student profile picture small circle, "[STUDENT NAME]", back arrow, video call icon. Message thread: sent bubble right in blue: "[QUESTION SENT]". Received bubble left in light gray: "[GENUINE RESULT MESSAGE]" — each message as a separate bubble. Instagram input bar at bottom with emoji, photo and audio icons. Very bottom outside screenshot: "[BRAND] · [WEBSITE]" in tiny plain text. [FORMAT] aspect ratio.
+```
+
+---
+
+### Template 93 — Promessa Direta
+
+```yaml
+id: 93
+category: G
+name: Promessa Direta
+strategy_note: Copy direto ao ponto. Uma promessa específica, um produto, um CTA. Para testar copy rapidamente em campanhas de performance. Funciona melhor com promessa mensurável e com prazo.
+formats: [4:5, 1:1]
+recommended_format: 4:5
+variables:
+  - key: BRAND COLOR
+    fill: brand_dna
+  - key: ACCENT COLOR
+    fill: brand_dna
+  - key: DIRECT PROMISE
+    fill: ai_copy
+    note: Promessa específica e mensurável com prazo, e.g. "Aprenda a Fechar R$10.000/mês em 90 Dias Ou Seu Dinheiro de Volta"
+  - key: EXPERT NAME
+    fill: brand_dna
+  - key: STAT 1
+    fill: user_input
+    note: e.g. "⭐ 4.9/5"
+  - key: STAT 2
+    fill: user_input
+    note: e.g. "3.400+ alunos"
+  - key: STAT 3
+    fill: user_input
+    note: e.g. "93% recomendam"
+  - key: CTA
+    fill: ai_copy
+    note: e.g. "QUERO APRENDER →"
+```
+
+**Prompt:**
+```
+Use the attached images as brand reference. Match exact brand colors and typography. Create: a direct response ad on a [BRAND COLOR] background. Full bleed color. Top third: large bold white condensed sans-serif headline: "[DIRECT PROMISE]". Key number or result in [ACCENT COLOR] for emphasis. Center: expert photo at 85mm f/2.8, soft light. Bottom third: three social proof micro-stats in white: "[STAT 1]" · "[STAT 2]" · "[STAT 3]". CTA button: "[CTA]" in [ACCENT COLOR], rounded, prominent. [FORMAT] aspect ratio.
+```
+
+---
+
+### Template 94 — Faux Story com Enquete
+
+```yaml
+id: 94
+category: G
+name: Faux Story com Enquete
+strategy_note: Replica o formato de Story do Instagram com enquete — altíssimo reconhecimento de padrão, para no scroll imediatamente. Use para audiência que segue o expert ou está em retargeting.
+formats: [9:16]
+recommended_format: 9:16
+variables:
+  - key: EXPERT NAME
+    fill: brand_dna
+  - key: BRAND COLOR
+    fill: brand_dna
+  - key: ENGAGING QUESTION
+    fill: ai_copy
+    note: Pergunta que divide o avatar em dois grupos com base em experiência ou dor
+  - key: OPTION A
+    fill: ai_copy
+    note: Opção A da enquete com emoji
+  - key: OPTION B
+    fill: ai_copy
+    note: Opção B da enquete com emoji
+  - key: FOLLOW-UP LINE
+    fill: ai_copy
+    note: Linha de CTA para o próximo Story, cria curiosidade
+```
+
+**Prompt:**
+```
+Use the attached images as brand reference for tone ONLY. This must look exactly like an Instagram Story. Create: a realistic Instagram Story frame. Top: Instagram Story header — circular avatar of expert, "[EXPERT NAME]", "Sua história · 3h" in gray, X close button top right, story progress bars at top. Background: solid [BRAND COLOR] or lifestyle photo of expert in natural setting. Center: a question sticker white pill black text: "[ENGAGING QUESTION]". Below: two answer option stickers side by side: "[OPTION A]" and "[OPTION B]". Below the poll: white text "[FOLLOW-UP LINE]". Thin white progress bar at top half-filled. [FORMAT] aspect ratio.
+```
+
+---
+
+### Template 95 — Comparativo Mercado Digital
+
+```yaml
+id: 95
+category: G
+name: Comparativo Mercado Digital
+strategy_note: Us vs Them adaptado para o mercado digital — método do expert vs tentativa aleatória. Muito eficaz para quem já tentou e falhou. Use em audiências de remarketing ou lookalike de compradores.
+formats: [1:1, 4:5]
+recommended_format: 1:1
+variables:
+  - key: BRAND COLOR
+    fill: brand_dna
+  - key: METHOD NAME
+    fill: brand_dna
+  - key: PAIN 1
+    fill: ai_copy
+    note: Dor 1 de quem tenta sem método
+  - key: PAIN 2
+    fill: ai_copy
+    note: Dor 2
+  - key: PAIN 3
+    fill: ai_copy
+    note: Dor 3
+  - key: PAIN 4
+    fill: ai_copy
+    note: Dor 4
+  - key: PAIN 5
+    fill: ai_copy
+    note: Dor 5
+  - key: RESULT 1
+    fill: ai_copy
+    note: Resultado 1 com o método
+  - key: RESULT 2
+    fill: ai_copy
+    note: Resultado 2
+  - key: RESULT 3
+    fill: ai_copy
+    note: Resultado 3
+  - key: RESULT 4
+    fill: ai_copy
+    note: Resultado 4
+  - key: RESULT 5
+    fill: ai_copy
+    note: Resultado 5
+  - key: BRAND
+    fill: brand_dna
+```
+
+**Prompt:**
+```
+Use the attached images as brand reference. Create: a side-by-side comparison ad for digital market. Hard vertical divide. LEFT side: dark muted background. Header: "Sem método". Below: vertical list with red X emojis: "❌ [PAIN 1]", "❌ [PAIN 2]", "❌ [PAIN 3]", "❌ [PAIN 4]", "❌ [PAIN 5]". RIGHT side: [BRAND COLOR] background. Header: "Com o [METHOD NAME]". Below: vertical list with green checkmark emojis: "✅ [RESULT 1]", "✅ [RESULT 2]", "✅ [RESULT 3]", "✅ [RESULT 4]", "✅ [RESULT 5]". Center VS badge in white. [BRAND] logo bottom right. [FORMAT] aspect ratio.
+```
+
+---
+
+### Template 96 — Faux E-mail Marketing
+
+```yaml
+id: 96
+category: G
+name: Faux E-mail Marketing
+strategy_note: Screenshot de e-mail com resultado ou convite parece orgânico e diferente de todo o feed. Alto stopping power por ser formato inesperado. Use para anunciar abertura de vagas, resultados ou lançamentos.
+formats: [4:5, 9:16]
+recommended_format: 4:5
+variables:
+  - key: EXPERT NAME
+    fill: brand_dna
+  - key: BRAND
+    fill: brand_dna
+  - key: WEBSITE
+    fill: brand_dna
+  - key: SUBJECT
+    fill: ai_copy
+    note: Assunto do e-mail, curto e intrigante, e.g. "Re: Sua inscrição foi confirmada 🎉"
+  - key: EMAIL BODY
+    fill: ai_copy
+    note: Corpo do e-mail — 4-6 linhas curtas, tom pessoal, anunciando resultado ou convite
+  - key: TITLE
+    fill: user_input
+    note: Cargo do expert, e.g. "Fundador do [COURSE NAME]"
+```
+
+**Prompt:**
+```
+Use the attached images as brand reference for tone ONLY. Create: a static ad designed to look exactly like an email screenshot on a phone. iPhone email app UI: top bar with back arrow and action icons. Email header: from "[EXPERT NAME] <contato@[BRAND].com.br>", to "Você", subject line in bold: "[SUBJECT]". Email body on white background, clean sans-serif: "Oi," — "[EMAIL BODY]" — "Com carinho," — "[EXPERT NAME]" — "[TITLE]". Bottom: small plain text "[BRAND] · [WEBSITE]". [FORMAT] aspect ratio.
+```
+
+---
+
+### Template 97 — Headline + Subhead + Expert
+
+```yaml
+id: 97
+category: G
+name: Headline + Subhead + Expert
+strategy_note: O formato mais limpo e testável do mercado digital. Uma foto, um headline, um subhead, um CTA. Use para testar variações de copy rapidamente antes de escalar.
+formats: [4:5, 1:1]
+recommended_format: 4:5
+variables:
+  - key: BRAND COLOR
+    fill: brand_dna
+  - key: ACCENT COLOR
+    fill: brand_dna
+  - key: MAIN HEADLINE
+    fill: ai_copy
+    note: Headline principal — provocativa ou de promessa forte
+  - key: SUBHEAD
+    fill: ai_copy
+    note: Subhead expandindo o headline com prova social ou especificidade
+  - key: EXPERT NAME
+    fill: brand_dna
+  - key: REVIEW COUNT
+    fill: user_input
+    note: e.g. "2.847 avaliações"
+  - key: CTA
+    fill: ai_copy
+    note: e.g. "Ver como funciona"
+```
+
+**Prompt:**
+```
+Use the attached images as brand reference. Match exact brand colors and typography. Create: a clean direct-response ad. Background: solid [BRAND COLOR] or clean gradient. Center: professional photo of expert — warm, direct, confident, looking at camera — at 85mm f/2.0, slightly off-center. Large bold white headline overlaid: "[MAIN HEADLINE]". Below in smaller regular weight white: "[SUBHEAD]". Bottom: [EXPERT NAME] + title + 5 stars + "[REVIEW COUNT]". CTA button: "[CTA]" in [ACCENT COLOR]. [FORMAT] aspect ratio.
+```
+
+---
+
+### Template 98 — Comentário YouTube ou Facebook
+
+```yaml
+id: 98
+category: G
+name: Comentário YouTube ou Facebook
+strategy_note: Screenshot de comentário de aula gratuita ou post viral. Prova social nativa ultra convincente. Use com comentários reais de alunos que mencionam resultado específico.
+formats: [4:5, 1:1]
+recommended_format: 4:5
+variables:
+  - key: COMMENTER NAME
+    fill: user_input
+    note: Nome real do comentarista, e.g. "Marcos Oliveira"
+  - key: AUTHENTIC COMMENT
+    fill: user_input
+    note: Comentário real — 2-4 linhas, resultado específico, tom grato e genuíno
+  - key: LIKE COUNT
+    fill: user_input
+    note: Número de curtidas no comentário, e.g. "847"
+  - key: EXPERT REPLY
+    fill: ai_copy
+    note: Resposta curta e calorosa do expert ao comentário
+  - key: BRAND
+    fill: brand_dna
+  - key: WEBSITE
+    fill: brand_dna
+```
+
+**Prompt:**
+```
+Use the attached images as brand reference for tone ONLY. Create: a social proof ad mimicking a YouTube comment screenshot. White background. Top: YouTube UI with dark header, video thumbnail showing expert teaching, view count and title. Comment section below: profile photo small circle, bold name "[COMMENTER NAME]", comment text in regular weight: "[AUTHENTIC COMMENT]". Thumbs up icon + "[LIKE COUNT]" · Reply · 2 dias atrás. Expert reply bubble below: "[EXPERT REPLY]". Bottom: "[BRAND] · [WEBSITE]" tiny plain text. [FORMAT] aspect ratio.
+```
+
+---
+
+### Template 99 — Urgência de Vaga
+
+```yaml
+id: 99
+category: G
+name: Urgência de Vaga
+strategy_note: Vagas limitadas ou turma fechando. Funciona especialmente bem para mentorias, grupos e produtos de alta interação. Use somente quando a limitação for real — não fabricada.
+formats: [4:5, 9:16]
+recommended_format: 4:5
+variables:
+  - key: BRAND COLOR
+    fill: brand_dna
+  - key: ACCENT COLOR
+    fill: brand_dna
+  - key: EXPERT NAME
+    fill: brand_dna
+  - key: VAGAS RESTANTES
+    fill: user_input
+    note: Número real de vagas, e.g. "Restam apenas 7 vagas"
+  - key: PRODUCT NAME
+    fill: brand_dna
+  - key: PRICE
+    fill: user_input
+    note: e.g. "R$1.997 ou 12x R$197"
+  - key: REASON 1
+    fill: ai_copy
+    note: Razão de urgência 1
+  - key: REASON 2
+    fill: ai_copy
+    note: Razão de urgência 2
+  - key: REASON 3
+    fill: ai_copy
+    note: Razão de urgência 3
+  - key: CTA
+    fill: ai_copy
+    note: e.g. "GARANTIR MINHA VAGA AGORA"
+```
+
+**Prompt:**
+```
+Use the attached images as brand reference. Match exact brand colors. Create: a scarcity-driven enrollment ad. Background: deep [BRAND COLOR]. Top: expert circular photo + [EXPERT NAME] + title. Large center visual showing "[VAGAS RESTANTES]" with a progress bar 90% filled in [ACCENT COLOR]. Below: "[PRODUCT NAME]" bold white + key benefit line + "[PRICE]". Stacked urgency reasons: "🔒 [REASON 1]", "📍 [REASON 2]", "🎁 [REASON 3]". Bottom: large full-width [ACCENT COLOR] CTA button: "[CTA]". [FORMAT] aspect ratio.
+```
+
+---
+
+### Template 100 — Notificação de Venda
+
+```yaml
+id: 100
+category: G
+name: Notificação de Venda
+strategy_note: Notificação de app de vendas no celular. Ultra nativo, formato novo no feed, altíssimo stopping power. Use para audiências de empreendedores e aspirantes a renda digital.
+formats: [4:5, 9:16]
+recommended_format: 4:5
+variables:
+  - key: PRODUCT NAME
+    fill: brand_dna
+  - key: STUDENT NAME 1
+    fill: user_input
+    note: Nome fictício ou real do comprador 1, e.g. "João S."
+  - key: STUDENT NAME 2
+    fill: user_input
+    note: Nome fictício ou real do comprador 2, e.g. "Maria L."
+  - key: PRICE
+    fill: user_input
+    note: Valor da venda, e.g. "R$997,00"
+  - key: BRAND
+    fill: brand_dna
+  - key: WEBSITE
+    fill: brand_dna
+```
+
+**Prompt:**
+```
+Use the attached images as brand reference for tone ONLY. Create: an ad that looks like a real smartphone notification screenshot. Top 30%: realistic iPhone lock screen or notification shade with dark background. A prominent push notification card: Hotmart-style green app icon · "Hotmart" · "agora". Notification text: "💰 Nova venda realizada!" — "[PRICE] · [PRODUCT NAME] · [STUDENT NAME 1]". Below: second identical notification appearing: "+1 nova venda · [PRICE] · [STUDENT NAME 2]". And a third: "+1 nova venda · [PRICE]". Stack of 3 notifications total. Outside notification area: plain white background with small text: "[BRAND] · Isso é possível para você também. · [WEBSITE]". [FORMAT] aspect ratio.
+```
+
+---
+
+### Template 101 — Nicho Específico
+
+```yaml
+id: 101
+category: G
+name: Nicho Específico
+strategy_note: Fala diretamente com um nicho específico — médico, advogado, professor, CLT, mãe, MEI. Segmentação na imagem aumenta CTR drasticamente. Use quando souber o segmento exato da campanha.
+formats: [4:5, 1:1]
+recommended_format: 4:5
+variables:
+  - key: BRAND COLOR
+    fill: brand_dna
+  - key: ACCENT COLOR
+    fill: brand_dna
+  - key: NICHE LABEL
+    fill: user_input
+    note: Label do nicho em caixa alta, e.g. "PARA MÉDICOS" ou "PARA QUEM TEM CLT"
+  - key: NICHE SPECIFIC HEADLINE
+    fill: ai_copy
+    note: Headline que fala diretamente com a dor e o desejo desse nicho específico
+  - key: SUBHEAD
+    fill: ai_copy
+    note: Subhead com o expert e o resultado específico para esse nicho
+  - key: EXPERT NAME
+    fill: brand_dna
+  - key: SOCIAL PROOF
+    fill: user_input
+    note: Prova social específica do nicho, e.g. "+340 médicos já transformaram suas carreiras"
+  - key: CTA
+    fill: ai_copy
+    note: e.g. "Quero saber como →"
+```
+
+**Prompt:**
+```
+Use the attached images as brand reference. Match exact brand colors. Create: a niche-targeted ad on [BRAND COLOR] background. Top: small uppercase label in [ACCENT COLOR] pill badge: "[NICHE LABEL]". Below: large bold white headline: "[NICHE SPECIFIC HEADLINE]". Subhead in smaller white regular: "[SUBHEAD]". Center: expert photo or niche-relevant lifestyle image at 85mm f/2.0. Bottom: "[SOCIAL PROOF]" + CTA button: "[CTA]" in [ACCENT COLOR]. [FORMAT] aspect ratio.
+```
+
+---
+
+### Template 102 — Grupo VIP de Alunos
+
+```yaml
+id: 102
+category: G
+name: Grupo VIP de Alunos
+strategy_note: Print de grupo de alunos comemorando resultado. Comunidade + prova social coletiva. Poderoso para mentorias e programas de acompanhamento onde a comunidade é um diferencial.
+formats: [4:5, 9:16]
+recommended_format: 4:5
+variables:
+  - key: GROUP NAME
+    fill: user_input
+    note: Nome do grupo, e.g. "🚀 Alunos [COURSE NAME] — VIP"
+  - key: MEMBER COUNT
+    fill: user_input
+    note: Número de membros, e.g. "847 membros"
+  - key: NAME1
+    fill: user_input
+    note: Nome do primeiro aluno
+  - key: MESSAGE 1
+    fill: user_input
+    note: Mensagem de resultado do primeiro aluno com emojis
+  - key: NAME2
+    fill: user_input
+    note: Nome do segundo aluno
+  - key: MESSAGE 2
+    fill: user_input
+    note: Mensagem de resultado do segundo aluno
+  - key: NAME3
+    fill: user_input
+    note: Nome do terceiro aluno
+  - key: MESSAGE 3
+    fill: user_input
+    note: Mensagem de resultado do terceiro aluno
+  - key: EXPERT REPLY
+    fill: ai_copy
+    note: Resposta calorosa do expert ao grupo
+  - key: BRAND
+    fill: brand_dna
+  - key: WEBSITE
+    fill: brand_dna
+```
+
+**Prompt:**
+```
+Use the attached images as brand reference for tone ONLY. Create: an ad mimicking a WhatsApp group screenshot. Chat interface: group header "[GROUP NAME]", "[MEMBER COUNT]". Chat thread showing multiple members celebrating: "[MESSAGE 1]" from "[NAME1]". "[MESSAGE 2]" from "[NAME2]". "[MESSAGE 3]" from "[NAME3]". Expert reply bubble: "[EXPERT REPLY]". Celebration emojis and reaction badges on messages. Bottom outside screenshot: "[BRAND] · Esse é o resultado de quem segue o método. · [WEBSITE]". [FORMAT] aspect ratio.
+```
+
+---
+
+### Template 103 — Infográfico de Transformação
+
+```yaml
+id: 103
+category: G
+name: Infográfico de Transformação
+strategy_note: Linha do tempo visual mostrando a jornada de transformação do aluno. Educacional + aspiracional. Funciona muito bem em topo de funil frio para mostrar o caminho completo.
+formats: [4:5, 16:9]
+recommended_format: 4:5
+variables:
+  - key: BRAND COLOR
+    fill: brand_dna
+  - key: HEADLINE
+    fill: ai_copy
+    note: Headline da transformação com prazo, e.g. "De Zero a R$10k/mês em 6 meses: O Caminho Real"
+  - key: MILESTONE 1 TITLE
+    fill: user_input
+    note: e.g. "Mês 1: Fundação"
+  - key: MILESTONE 1 DESC
+    fill: user_input
+    note: e.g. "Primeiros R$500 online"
+  - key: MILESTONE 2 TITLE
+    fill: user_input
+  - key: MILESTONE 2 DESC
+    fill: user_input
+  - key: MILESTONE 3 TITLE
+    fill: user_input
+  - key: MILESTONE 3 DESC
+    fill: user_input
+  - key: MILESTONE 4 TITLE
+    fill: user_input
+  - key: MILESTONE 4 DESC
+    fill: user_input
+  - key: BRAND
+    fill: brand_dna
+  - key: CTA
+    fill: ai_copy
+    note: e.g. "Ver o programa completo"
+```
+
+**Prompt:**
+```
+Use the attached images as brand reference. Match exact brand colors and typography. Create: a transformation timeline infographic ad on clean white background. Top: bold [BRAND COLOR] headline: "[HEADLINE]". Center: a horizontal timeline with 4 milestone markers connected by a progress line in [BRAND COLOR]. Each milestone: numbered circle in [BRAND COLOR] + "[MILESTONE 1 TITLE]" bold + "[MILESTONE 1 DESC]" small, then "[MILESTONE 2 TITLE]" + "[MILESTONE 2 DESC]", "[MILESTONE 3 TITLE]" + "[MILESTONE 3 DESC]", "[MILESTONE 4 TITLE]" + "[MILESTONE 4 DESC]". Final milestone has [BRAND COLOR] trophy icon. Bottom: [BRAND] logo + "[CTA]" button. [FORMAT] aspect ratio.
+```
+
+---
+
+### Template 104 — Faux Post de Feed
+
+```yaml
+id: 104
+category: G
+name: Faux Post de Feed
+strategy_note: Replica um post de feed do Instagram com alto engajamento visível. A prova social de curtidas e comentários é o gancho. Use quando o expert tiver posts virais ou alto engajamento orgânico.
+formats: [4:5, 1:1]
+recommended_format: 4:5
+variables:
+  - key: EXPERT HANDLE
+    fill: brand_dna
+    note: Handle do Instagram, e.g. "@expertname"
+  - key: LIKE COUNT
+    fill: user_input
+    note: e.g. "4.847"
+  - key: POST CAPTION HOOK
+    fill: ai_copy
+    note: Primeiras linhas da legenda — hook forte que termina em "..."
+  - key: COMMENT COUNT
+    fill: user_input
+    note: e.g. "847"
+  - key: COMMENT 1
+    fill: ai_copy
+    note: Comentário positivo de fã
+  - key: COMMENT 2
+    fill: ai_copy
+    note: Comentário positivo de fã
+```
+
+**Prompt:**
+```
+Use the attached images as brand reference for tone ONLY. Create: an ad designed to look like an Instagram feed post with high engagement. Top: Instagram post header — expert circular profile photo + "[EXPERT HANDLE]" + "Seguindo" button grayed out. Post image area: lifestyle photo of expert at a keynote, in a studio or at a whiteboard teaching — warm, authentic. Below post: heart + comment + share icons. "🤍 [LIKE COUNT] curtidas". Caption: "[EXPERT HANDLE]" bold + "[POST CAPTION HOOK]" followed by "...ver mais". "Ver todos os [COMMENT COUNT] comentários". Two featured comments: "[COMMENT 1]", "[COMMENT 2]". "3 HORAS ATRÁS". [FORMAT] aspect ratio.
+```
+
+---
+
+### Template 105 — Garantia em Destaque
+
+```yaml
+id: 105
+category: G
+name: Garantia em Destaque
+strategy_note: A garantia como protagonista reduz a objeção de risco. Muito eficaz para retargeting de quem visitou a página de vendas mas não comprou. Use quando a garantia for um diferencial real.
+formats: [1:1, 4:5]
+recommended_format: 1:1
+variables:
+  - key: BRAND COLOR
+    fill: brand_dna
+  - key: GUARANTEE DAYS
+    fill: user_input
+    note: Número de dias da garantia, e.g. "30"
+  - key: GUARANTEE HEADLINE
+    fill: ai_copy
+    note: e.g. "Não gostou? Devolvemos 100% do seu dinheiro."
+  - key: GUARANTEE EXPLANATION
+    fill: ai_copy
+    note: 2-3 linhas específicas e tranquilizadoras sobre como funciona a garantia
+  - key: EXPERT NAME
+    fill: brand_dna
+  - key: TITLE
+    fill: user_input
+    note: Cargo ou título do expert
+  - key: CTA
+    fill: ai_copy
+    note: e.g. "Começar com garantia"
+```
+
+**Prompt:**
+```
+Use the attached images as brand reference. Match exact brand colors. Create: a guarantee-focused trust ad. Background: clean light [BRAND COLOR] or white. Center: large bold illustrated guarantee badge — circular seal design in [BRAND COLOR] with "[GUARANTEE DAYS]" in oversized numbers and "Dias de Garantia Incondicional" around it. Below badge: bold black headline: "[GUARANTEE HEADLINE]". Body copy in regular weight: "[GUARANTEE EXPLANATION]". Expert photo small + [EXPERT NAME] + [TITLE] bottom left. CTA button: "[CTA]" in [BRAND COLOR] rounded. [FORMAT] aspect ratio.
+```
+
+---
+
+### Template 106 — Faux Artigo Jornal Digital BR
+
+```yaml
+id: 106
+category: G
+name: Faux Artigo Jornal Digital BR
+strategy_note: Versão brasileira do faux press — masthead de portal de notícias BR. Alta autoridade percebida. Use para produtos com histórias de transformação fortes ou experts com trajetória interessante.
+formats: [4:5]
+recommended_format: 4:5
+variables:
+  - key: PUBLICATION STYLE
+    fill: user_input
+    note: Estilo de publicação, e.g. "EXAME" ou "ÉPOCA NEGÓCIOS" ou "VALOR ECONÔMICO"
+  - key: SECTION
+    fill: ai_copy
+    note: e.g. "EMPREENDEDORISMO · DESTAQUE"
+  - key: HEADLINE
+    fill: ai_copy
+    note: Headline estilo jornalístico sobre o expert ou o método — credível e intrigante
+  - key: EXPERT NAME
+    fill: brand_dna
+```
+
+**Prompt:**
+```
+Use the attached images as brand reference. Create: an ad designed to look like a Brazilian news portal article screenshot. Top 30%: white background with realistic Brazilian publication masthead "[PUBLICATION STYLE]" in large bold serif. Below: thin gray rule. Small gray text "[SECTION]" left-aligned. Bold serif headline: "[HEADLINE]". Author line: "Por Redação [PUBLICATION STYLE]" · date. Bottom 60%: lifestyle photo of [EXPERT NAME] in a professional but casual interview-style setting. No logo overlay. No CTA visible. Should look like an organic article share. [FORMAT] aspect ratio.
+```
+
+---
+
+### Template 107 — Carrossel Estático Teaser
+
+```yaml
+id: 107
+category: G
+name: Carrossel Estático Teaser
+strategy_note: Frame de carrossel que parece incompleto — a seta de arrastar cria curiosidade e simula formato nativo do Instagram. Use para educação de audiência ou listas de dicas que geram alto engajamento.
+formats: [1:1, 4:5]
+recommended_format: 1:1
+variables:
+  - key: BRAND COLOR
+    fill: brand_dna
+  - key: CAROUSEL HOOK
+    fill: ai_copy
+    note: Título do carrossel em formato de lista, e.g. "5 erros que fazem 90% das pessoas desistirem do digital (e como evitar)"
+  - key: EXPERT HANDLE
+    fill: brand_dna
+  - key: PARTIAL TEXT
+    fill: ai_copy
+    note: Início do slide 2, e.g. "Erro 1: Começar sem..."
+```
+
+**Prompt:**
+```
+Use the attached images as brand reference. Match exact brand colors. Create: a single-frame ad that mimics the first slide of an Instagram carousel deliberately cut off on the right edge. Background: clean [BRAND COLOR]. Left 85% of frame: bold white headline "[CAROUSEL HOOK]". Below: "1 / 5" in small white text. Right edge: deliberately cut off with a peek of slide 2 visible — another panel with partial text "[PARTIAL TEXT]". Instagram carousel navigation dot indicators at bottom center. Bottom left: [EXPERT HANDLE]. The cut-off creates a strong visual pull to swipe. [FORMAT] aspect ratio.
+```
+
+---
+
+### Template 108 — Depoimento em Vídeo Pausado
+
+```yaml
+id: 108
+category: G
+name: Depoimento em Vídeo Pausado
+strategy_note: Replica um frame pausado de vídeo depoimento com barra de progresso e controles. Provoca curiosidade para dar play. Use com foto real de aluno em momento natural, não produzido.
+formats: [4:5, 9:16]
+recommended_format: 4:5
+variables:
+  - key: BRAND COLOR
+    fill: brand_dna
+  - key: STUDENT NAME
+    fill: user_input
+    note: Nome + idade + cidade do aluno, e.g. "Ana Paula, 34 anos · São Paulo"
+  - key: SUBTITLE TEXT
+    fill: ai_copy
+    note: Trecho da fala do aluno no meio de uma frase importante, e.g. "...e em 45 dias eu já tinha recuperado o investimento..."
+  - key: BRAND
+    fill: brand_dna
+```
+
+**Prompt:**
+```
+Use the attached images as brand reference for tone ONLY. Create: a static ad that looks like a paused video testimonial. Full-bleed candid photo of student mid-sentence, natural expression, home or simple background — feels like a phone selfie video, not produced. Overlaid video player UI: bottom progress bar partially filled at 30% in [BRAND COLOR]. Play button triangle icon centered white semi-transparent circle. Video title overlay bottom left: "[STUDENT NAME]". Time code: "0:34 / 2:17". Subtitles bar at bottom: "[SUBTITLE TEXT]" in white text on dark semi-transparent strip. Top left: small [BRAND] watermark. [FORMAT] aspect ratio.
+```
+
+---
+
+### Template 109 — Oferta de Entrada (Low Ticket)
+
+```yaml
+id: 109
+category: G
+name: Oferta de Entrada
+strategy_note: Produto de entrada de baixo valor — ebook, mini-curso, workshop. Foco total na oferta irresistível e no preço de impulso. Use para aquisição de clientes em topo de funil com custo baixo.
+formats: [4:5, 1:1]
+recommended_format: 4:5
+variables:
+  - key: BRAND COLOR
+    fill: brand_dna
+  - key: ACCENT COLOR
+    fill: brand_dna
+  - key: PRICE
+    fill: user_input
+    note: Preço de entrada, e.g. "R$27"
+  - key: PRODUCT NAME
+    fill: brand_dna
+  - key: ITEM 1
+    fill: user_input
+    note: Item 1 do value stack com valor, e.g. "[PRODUCT NAME] — R$197"
+  - key: ITEM 2
+    fill: user_input
+    note: Bônus 1 com valor, e.g. "Bônus: Planilha de Controle — R$97"
+  - key: ITEM 3
+    fill: user_input
+    note: Bônus 2 com valor, e.g. "Bônus 2: Templates Prontos — R$47"
+  - key: TOTAL VALUE
+    fill: ai_copy
+    note: Soma do value stack, e.g. "R$341"
+  - key: CTA
+    fill: ai_copy
+    note: e.g. "QUERO POR R$27 →"
+  - key: URGENCY LINE
+    fill: ai_copy
+    note: e.g. "⏱ Oferta por tempo limitado"
+```
+
+**Prompt:**
+```
+Use the attached images as brand reference. Match exact brand colors. Create: a low-ticket impulse offer ad on [BRAND COLOR] or gradient background. Top: bold white all-caps: "HOJE POR APENAS [PRICE]". Center: clean product mockup — ebook cover or mini-course device mockup with [PRODUCT NAME] prominently. Below: "O que você leva:" then list: "📘 [ITEM 1]", "🎁 [ITEM 2]", "🎁 [ITEM 3]", "TOTAL: [TOTAL VALUE] — Hoje: [PRICE]". "✅ 7 dias de garantia". CTA: large pill button in [ACCENT COLOR]: "[CTA]". Bottom: small "[URGENCY LINE]". [FORMAT] aspect ratio.
+```
+
+---
+
+### Template 110 — Manifesto de Marca Digital
+
+```yaml
+id: 110
+category: G
+name: Manifesto de Marca Digital
+strategy_note: Copy manifesto adaptado para o mercado digital brasileiro. Fala com a dor de quem tenta e não consegue. Alta identificação e alto compartilhamento orgânico. Use para brand building e audiências que já interagiram com o conteúdo do expert.
+formats: [1:1, 4:5]
+recommended_format: 1:1
+variables:
+  - key: MANIFESTO OPENING
+    fill: ai_copy
+    note: Frase de abertura poderosa que valida a dor do avatar
+  - key: MANIFESTO BODY
+    fill: ai_copy
+    note: 12-16 linhas curtas estruturadas como — validação da dor, identificação do vilão, reframing, possibilidade, posicionamento da marca
+  - key: EXPERT NAME
+    fill: brand_dna
+  - key: TITLE
+    fill: user_input
+    note: Cargo ou missão do expert
+  - key: BRAND
+    fill: brand_dna
+  - key: COURSE NAME
+    fill: brand_dna
+```
+
+**Prompt:**
+```
+Use the attached images as brand reference. Match exact brand typography and tone. Create: a copy-dominant manifesto ad on clean white background. No imagery — text IS the ad. Top: oversized bold black serif headline: "[MANIFESTO OPENING]" spanning top 20%. Below: left-aligned body copy in short punchy lines — NOT paragraphs: "[MANIFESTO BODY]". Bottom 15%: expert photo small circular + [EXPERT NAME] + [TITLE] + [COURSE NAME] name. [FORMAT] aspect ratio.
+```
+
+---

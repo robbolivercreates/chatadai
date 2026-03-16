@@ -21,19 +21,27 @@ export interface TemplateData {
   prompt: string;
 }
 
-// ─── Singleton cache ─────────────────────────────────────────────
+// ─── Singleton cache (mtime-aware so dev changes auto-reload) ────
 const _cache = new Map<string, Map<number, TemplateData>>();
+const _cacheMtime = new Map<string, number>();
 
 /**
  * Parse TEMPLATES_{lang}.md and return a Map<id, TemplateData>.
- * Results are cached after first load per language.
+ * Cache is invalidated whenever the file's mtime changes.
  */
 export function loadTemplates(language: "en" | "pt" = "en"): Map<number, TemplateData> {
   const cacheKey = language;
-  if (_cache.has(cacheKey)) return _cache.get(cacheKey)!;
-
   const fileName = language === "pt" ? "TEMPLATES_PT.md" : "TEMPLATES_EN.md";
   const filePath = path.join(process.cwd(), fileName);
+
+  // Check if file has changed since last load
+  let currentMtime = 0;
+  try { currentMtime = fs.statSync(filePath).mtimeMs; } catch { /* file missing */ }
+
+  if (_cache.has(cacheKey) && _cacheMtime.get(cacheKey) === currentMtime) {
+    return _cache.get(cacheKey)!;
+  }
+
 
   if (!fs.existsSync(filePath)) {
     console.error(`[Templates] ${fileName} not found at`, filePath);
@@ -107,14 +115,15 @@ export function loadTemplates(language: "en" | "pt" = "en"): Map<number, Templat
 
   console.log(`[Templates] Loaded ${templates.size} templates from ${fileName}`);
   _cache.set(cacheKey, templates);
+  _cacheMtime.set(cacheKey, currentMtime);
   return templates;
 }
 
 /**
  * Get a single template by ID.
  */
-export function getTemplate(id: number): TemplateData | undefined {
-  return loadTemplates().get(id);
+export function getTemplate(id: number, language: "en" | "pt" = "en"): TemplateData | undefined {
+  return loadTemplates(language).get(id);
 }
 
 /**
