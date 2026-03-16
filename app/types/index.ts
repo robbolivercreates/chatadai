@@ -24,7 +24,10 @@ export type MessagePart =
   | FormatSelectorPart
   | TemplateGalleryPart
   | ImageUploadPromptPart
-  | ScrapedImagesPart;
+  | ScrapedImagesPart
+  | QuickRepliesPart
+  | CopyReviewPart
+  | ActionButtonsPart;
 
 export interface TextPart {
   type: "text";
@@ -70,6 +73,35 @@ export interface FormatSelectorPart {
 
 export interface TemplateGalleryPart {
   type: "template_gallery";
+}
+
+/** Clickable chips that appear below an agent question — user picks one without typing */
+export interface QuickRepliesPart {
+  type: "quick_replies";
+  replies: string[];
+}
+
+/** Visual card showing the copy draft — fields are editable inline */
+export interface CopyReviewField {
+  label: string;
+  value: string;
+}
+export interface CopyReviewPart {
+  type: "copy_review";
+  templateName: string;
+  fields: CopyReviewField[];
+  approvePrompt: string;   // message sent when user clicks "Gerar assim"
+}
+
+/** Row of action buttons shown after an ad is generated */
+export interface ActionButton {
+  label: string;
+  icon: string;
+  prompt: string;          // message sent to chat when clicked
+}
+export interface ActionButtonsPart {
+  type: "action_buttons";
+  buttons: ActionButton[];
 }
 
 export interface ImageUploadPromptPart {

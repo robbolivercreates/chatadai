@@ -1,11 +1,12 @@
 "use client";
 
 import ReactMarkdown from "react-markdown";
-import type { ChatMessage, MessagePart } from "../types";
+import type { ChatMessage, MessagePart, CopyReviewPart, ActionButtonsPart, QuickRepliesPart } from "../types";
 import { AdPreviewBubble } from "./AdPreviewBubble";
 import { BrandDNACard } from "./BrandDNACard";
 import { TemplateGallery } from "./TemplateGallery";
 import { ImagePicker } from "./ImagePicker";
+import { CopyReviewCard } from "./CopyReviewCard";
 
 interface Props {
   message: ChatMessage;
@@ -15,6 +16,42 @@ interface Props {
   onImagesSelected?: (images: { data: string; mimeType: string }[]) => void;
 }
 
+// ─── Quick Reply Chips ────────────────────────────────────────────
+function QuickReplies({ part, onSend }: { part: QuickRepliesPart; onSend?: (t: string) => void }) {
+  return (
+    <div className="flex flex-wrap gap-2 mt-2 chip-stagger">
+      {part.replies.map((reply) => (
+        <button
+          key={reply}
+          onClick={() => onSend?.(reply)}
+          className="chip-animate px-3 py-1.5 rounded-full border border-indigo-500/40 bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-300 hover:text-indigo-200 text-[12px] font-medium transition-all duration-150 active:scale-[0.96]"
+        >
+          {reply}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+// ─── Action Buttons ───────────────────────────────────────────────
+function ActionButtons({ part, onSend }: { part: ActionButtonsPart; onSend?: (t: string) => void }) {
+  return (
+    <div className="flex flex-wrap gap-2 mt-3">
+      {part.buttons.map((btn) => (
+        <button
+          key={btn.label}
+          onClick={() => onSend?.(btn.prompt)}
+          className="flex items-center gap-1.5 px-3 py-2 rounded-xl border border-white/12 bg-white/5 hover:bg-white/10 text-white/70 hover:text-white text-[12px] font-medium transition-all duration-150 active:scale-[0.97]"
+        >
+          {btn.icon && <span>{btn.icon}</span>}
+          <span>{btn.label}</span>
+        </button>
+      ))}
+    </div>
+  );
+}
+
+// ─── Part Renderer ────────────────────────────────────────────────
 function renderPart(
   part: MessagePart,
   msgId: string,
@@ -63,17 +100,35 @@ function renderPart(
         />
       );
 
+    case "quick_replies":
+      return <QuickReplies key="quick-replies" part={part} onSend={sendMessage} />;
+
+    case "copy_review":
+      return (
+        <div key="copy-review" className="card-animate">
+          <CopyReviewCard
+            part={part as CopyReviewPart}
+            onApprove={(prompt) => sendMessage?.(prompt)}
+            onEdit={(_label, _val, editPrompt) => sendMessage?.(editPrompt)}
+          />
+        </div>
+      );
+
+    case "action_buttons":
+      return <ActionButtons key="action-buttons" part={part as ActionButtonsPart} onSend={sendMessage} />;
+
     default:
       return null;
   }
 }
 
+// ─── MessageBubble ────────────────────────────────────────────────
 export function MessageBubble({ message, onRegenerate, sendMessage, isDevMode, onImagesSelected }: Props) {
   const isUser = message.role === "user";
 
   if (isUser) {
     return (
-      <div className="flex justify-end gap-3 px-4 py-1">
+      <div className="flex justify-end gap-3 px-4 py-1 msg-user-animate">
         <div
           className="max-w-[75%] px-4 py-2.5 rounded-2xl rounded-br-sm text-sm leading-relaxed"
           style={{
@@ -118,7 +173,7 @@ export function MessageBubble({ message, onRegenerate, sendMessage, isDevMode, o
 
   // Assistant message
   return (
-    <div className="flex gap-3 px-4 py-1 max-w-[82%]">
+    <div className="flex gap-3 px-4 py-1 max-w-[82%] msg-animate-in">
       {/* Avatar */}
       <div
         className="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center text-xs font-bold mt-0.5"
@@ -127,7 +182,7 @@ export function MessageBubble({ message, onRegenerate, sendMessage, isDevMode, o
         ✦
       </div>
 
-      <div className="flex flex-col gap-3 min-w-0 flex-1">
+      <div className="flex flex-col gap-2 min-w-0 flex-1">
         {message.parts && message.parts.length > 0 ? (
           message.parts.map((part, i) => (
             <div key={i}>{renderPart(part, message.id, onRegenerate, sendMessage, isDevMode, onImagesSelected)}</div>

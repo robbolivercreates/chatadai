@@ -42,6 +42,10 @@ export default function Home() {
     { icon: "📸", label: tWelcome("chipUpload"), prompt: "Quero fazer upload de fotos do meu produto" },
   ];
 
+  // Agent stage for progress bar: 0=welcome, 1=brand, 2=templates, 3=copy, 4=creation
+  const [agentStage, setAgentStage] = useState(0);
+
+
   const fileInputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -52,6 +56,11 @@ export default function Home() {
   const { geminiApiKey, language } = useSettingsStore();
 
   const activeSession = getActiveSession();
+
+  // Stage labels for progress bar
+  const STAGES = language === "pt"
+    ? ["Marca", "Templates", "Copy", "Criação"]
+    : ["Brand", "Templates", "Copy", "Creation"];
 
   // Sync messages when active session changes
   useEffect(() => {
@@ -65,6 +74,7 @@ export default function Home() {
     setUploadedImages([]);
     productImagesRef.current = []; // Reset product images on session switch
     setIsDevMode(false); // Reset dev mode on session switch
+    setAgentStage(0); // Reset progress bar on session switch
   }, [activeChatId]);
 
   // Persist messages
@@ -87,12 +97,17 @@ export default function Home() {
     ta.style.height = Math.min(ta.scrollHeight, 160) + "px";
   }, [input]);
 
-  // Show format selector when agent asks for format
+  // Detect stage from last assistant message to auto-advance progress bar
   useEffect(() => {
     const lastMsg = messages[messages.length - 1];
     if (!lastMsg || lastMsg.role !== "assistant") return;
     const hasFmtPart = lastMsg.parts?.some((p) => p.type === "format_selector");
     setShowFormatSelector(!!hasFmtPart);
+    // Infer agent stage from part types
+    if (lastMsg.parts?.some((p) => p.type === "brand_dna")) setAgentStage(1);
+    if (lastMsg.parts?.some((p) => p.type === "template_gallery")) setAgentStage(2);
+    if (lastMsg.parts?.some((p) => p.type === "copy_review")) setAgentStage(3);
+    if (lastMsg.parts?.some((p) => p.type === "ad_preview")) setAgentStage(4);
   }, [messages]);
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -146,7 +161,6 @@ export default function Home() {
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
     setUploadedImages([]);
-    setInput("");
     
     // Developer Mode Intercept
     const trimmedInput = trimmed.toLowerCase();
@@ -411,7 +425,7 @@ export default function Home() {
               className="w-6 h-6 rounded-md flex items-center justify-center text-[11px] font-bold"
               style={{ background: "var(--accent)", color: "#fff" }}
             >
-              A
+      A
             </div>
             <span className="text-[13px] font-semibold" style={{ color: "var(--text-primary)" }}>
               AdForge
@@ -438,22 +452,43 @@ export default function Home() {
                 {tWelcome("title")}
               </h1>
               <p className="text-sm max-w-xs" style={{ color: "var(--text-secondary)" }}>
-                {tWelcome("subtitle")}
+                {language === "pt"
+                  ? "Crie anúncios de alta conversão em minutos."
+                  : "Create high-converting ads in minutes."}
               </p>
             </div>
 
-            {/* Quick chips */}
-            <div className="flex flex-wrap gap-2 justify-center">
-              {CHIPS.map((chip) => (
-                <button
-                  key={chip.label}
-                  className="action-pill"
-                  onClick={() => sendMessage(chip.prompt)}
-                >
-                  <span>{chip.icon}</span>
-                  <span>{chip.label}</span>
-                </button>
-              ))}
+            {/* Path selection cards */}
+            <div className="flex gap-4 w-full max-w-sm">
+              <button
+                onClick={() => sendMessage("Quero enviar as fotos do meu produto e contar sobre a minha marca")}
+                className="flex-1 flex flex-col items-center gap-3 px-4 py-5 rounded-2xl border border-white/10 bg-white/3 hover:bg-white/7 hover:border-white/20 transition-all duration-200 group text-center active:scale-[0.97]"
+              >
+                <span className="text-3xl group-hover:scale-110 transition-transform duration-200">📸</span>
+                <div>
+                  <p className="text-[13px] font-semibold text-white/80 group-hover:text-white transition-colors">
+                    {language === "pt" ? "Tenho fotos do produto" : "I have product photos"}
+                  </p>
+                  <p className="text-[10px] text-white/35 mt-0.5">
+                    {language === "pt" ? "Upload + contar sobre a marca" : "Upload + tell me about your brand"}
+                  </p>
+                </div>
+              </button>
+
+              <button
+                onClick={() => sendMessage("Quero compartilhar o URL do meu site para análise automática da marca")}
+                className="flex-1 flex flex-col items-center gap-3 px-4 py-5 rounded-2xl border border-white/10 bg-white/3 hover:bg-white/7 hover:border-white/20 transition-all duration-200 group text-center active:scale-[0.97]"
+              >
+                <span className="text-3xl group-hover:scale-110 transition-transform duration-200">🔗</span>
+                <div>
+                  <p className="text-[13px] font-semibold text-white/80 group-hover:text-white transition-colors">
+                    {language === "pt" ? "Tenho um site da marca" : "I have a brand website"}
+                  </p>
+                  <p className="text-[10px] text-white/35 mt-0.5">
+                    {language === "pt" ? "Analiso automaticamente" : "I'll analyse it automatically"}
+                  </p>
+                </div>
+              </button>
             </div>
 
             {/* Input */}
@@ -464,12 +499,52 @@ export default function Home() {
         ) : (
           /* ─── Chat messages ───────────────────────────────────── */
           <>
-            <div className="flex-1 overflow-y-auto dark-scrollbar py-6 flex flex-col gap-1">
+            {/* ── Agent Progress Bar ─────────────────────────────── */}
+            {agentStage > 0 && (
+              <div className="flex-shrink-0 px-4 py-2 border-b border-white/5">
+                <div className="flex items-center gap-0 max-w-md">
+                  {STAGES.map((stage, idx) => {
+                    const stageNum = idx + 1;
+                    const isDone = agentStage > stageNum;
+                    const isCurrent = agentStage === stageNum;
+                    return (
+                      <div key={stage} className="flex items-center gap-0">
+                        <div className="flex flex-col items-center gap-0.5">
+                          <div
+                            className={`w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-bold transition-all ${
+                              isDone
+                                ? "bg-emerald-500/30 text-emerald-400 ring-1 ring-emerald-500/40"
+                                : isCurrent
+                                ? "bg-indigo-500/30 text-indigo-300 ring-1 ring-indigo-500/50 step-active"
+                                : "bg-white/5 text-white/20"
+                            }`}
+                          >
+                            {isDone ? "✓" : stageNum}
+                          </div>
+                          <span className={`text-[8px] font-medium ${
+                            isCurrent ? "text-indigo-400" : isDone ? "text-emerald-400/60" : "text-white/20"
+                          }`}>
+                            {stage}
+                          </span>
+                        </div>
+                        {idx < STAGES.length - 1 && (
+                          <div className={`h-px w-8 mx-1 mb-3 ${
+                            agentStage > stageNum ? "bg-emerald-500/40" : "bg-white/10"
+                          }`} />
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            <div className="flex-1 overflow-y-auto dark-scrollbar py-6 flex flex-col gap-1 chat-enter">
               {messages.map((msg) => (
                 <MessageBubble
                   key={msg.id}
                   message={msg}
-                  onRegenerate={() => {}}
+                  onRegenerate={() => sendMessage("Quero gerar esse anúncio de novo com uma variação diferente")}
                   sendMessage={sendMessage}
                   isDevMode={isDevMode}
                   onImagesSelected={(selectedImages) => {
@@ -490,18 +565,18 @@ export default function Home() {
 
               {/* Loading indicator */}
               {isLoading && (
-                <div className="flex gap-3 px-4 py-2">
+                <div className="flex gap-3 px-4 py-2 msg-animate-in">
                   <div
                     className="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center text-xs font-bold"
                     style={{ background: "rgba(99,102,241,0.22)", color: "#a5b4fc" }}
                   >
                     ✦
                   </div>
-                  <div className="flex items-center gap-2 mt-1.5">
-                    <span className="typing-dot" style={{ animationDelay: "0ms" }} />
-                    <span className="typing-dot" style={{ animationDelay: "150ms" }} />
-                    <span className="typing-dot" style={{ animationDelay: "300ms" }} />
-                    <span className="text-xs ml-1" style={{ color: "var(--text-tertiary)" }}>
+                  <div className="flex items-center gap-2.5 mt-2">
+                    <span className="typing-dot-premium" style={{ animationDelay: "0ms" }} />
+                    <span className="typing-dot-premium" style={{ animationDelay: "200ms" }} />
+                    <span className="typing-dot-premium" style={{ animationDelay: "400ms" }} />
+                    <span className="text-[11px] ml-1.5 font-medium" style={{ color: "var(--text-tertiary)" }}>
                       {loadingLabel}
                     </span>
                   </div>

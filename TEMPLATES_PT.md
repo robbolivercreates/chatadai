@@ -14,6 +14,10 @@ name: Headline
 strategy_note: Testa renderizacao de texto em portugues. Headlines BR ate 14 palavras.
 formats: ['4:5', '1:1']
 recommended_format: 4:5
+market_tags: ['branding', 'produto-fisico', 'awareness']
+use_case: Anuncio clean com headline forte e produto em destaque. Ideal para awareness e topo de funil.
+best_for: ['Produto físico', 'E-commerce', 'Awareness', 'Branding']
+difficulty: Fácil
 variables:
   - key: BACKGROUND
     fill: brand_dna
@@ -47,6 +51,10 @@ name: Oferta com Parcelamento + Pix
 strategy_note: Parcela como headline. Preco Pix como oferta secundaria. Frete gratis como value add.
 formats: ['9:16', '4:5']
 recommended_format: 9:16
+market_tags: ['pix', 'parcelamento', 'frete-gratis', 'oferta', 'ecommerce', 'produto-fisico', 'preco']
+use_case: Converte com foco em preco parcelado e desconto Pix. O formato mais brasileiro de vender.
+best_for: ['E-commerce', 'Produto físico', 'Oferta relâmpago', 'Black Friday']
+difficulty: Fácil
 variables:
   - key: COR PRIMARIA DA MARCA
     fill: brand_dna
@@ -84,6 +92,10 @@ name: Depoimento com Cenario Brasileiro
 strategy_note: Cenarios BR reais + texto em portugues. Deve cheirar a Brasil — azulejo, granito, luz tropical.
 formats: ['9:16', '4:5']
 recommended_format: 9:16
+market_tags: ['depoimento', 'ugc', 'cenario-brasileiro', 'prova-social', 'beleza', 'saude']
+use_case: Depoimento de cliente em cenário 100% brasileiro. Gera identificação imediata com o público.
+best_for: ['Beleza', 'Saúde', 'Produto físico', 'Prova social']
+difficulty: Fácil
 variables:
   - key: CENARIO BRASILEIRO
     fill: ai_copy
@@ -121,6 +133,10 @@ name: Diagrama de Beneficios
 strategy_note: Layout educacional diagrama. Adaptar idioma e tom.
 formats: ['4:5', '1:1']
 recommended_format: 4:5
+market_tags: ['educacional', 'beneficios', 'produto-fisico', 'suplemento', 'saude']
+use_case: Diagrama visual que explica os 4 principais benefícios do produto de forma didática.
+best_for: ['Suplementos', 'Saúde e bem-estar', 'Educacional', 'Produto técnico']
+difficulty: Fácil
 variables:
   - key: COR DA MARCA
     fill: brand_dna
@@ -152,6 +168,10 @@ name: Lista de Beneficios
 strategy_note: Split composition. Produto esquerda, beneficios direita.
 formats: ['4:5', '1:1']
 recommended_format: 4:5
+market_tags: ['beneficios', 'produto-fisico', 'ecommerce', 'saude', 'beleza']
+use_case: Produto de um lado, lista de 5 benefícios do outro. Layout limpo e direto ao ponto.
+best_for: ['E-commerce', 'Produto físico', 'Saúde', 'Beleza']
+difficulty: Fácil
 variables:
   - key: BACKGROUND
     fill: brand_dna
@@ -183,6 +203,10 @@ name: Prova Social — Membros + Reclame Aqui + Imprensa BR
 strategy_note: Trust stack brasileiro: clientes + nota RA + logos de imprensa BR.
 formats: ['4:5', '1:1']
 recommended_format: 4:5
+market_tags: ['prova-social', 'reclame-aqui', 'imprensa', 'trust', 'ecommerce', 'produto-fisico']
+use_case: Empilha prova social brasileira: Reclame Aqui, logos de imprensa e volume de clientes.
+best_for: ['E-commerce', 'Marca estabelecida', 'Eletrônicos', 'Beleza']
+difficulty: Médio
 variables:
   - key: BACKGROUND
     fill: brand_dna
@@ -224,6 +248,10 @@ name: Nos vs. Eles
 strategy_note: Comparacao lado a lado. Adaptar idioma.
 formats: ['4:5', '1:1']
 recommended_format: 4:5
+market_tags: ['comparacao', 'concorrente', 'performance', 'ecommerce', 'suplemento']
+use_case: Comparativo lado a lado mostrando suas vantagens frente à concorrência genérica.
+best_for: ['Suplementos', 'SaaS', 'Produto diferenciado', 'Performance']
+difficulty: Médio
 variables:
   - key: COR PRIMARIA DA MARCA
     fill: brand_dna
@@ -257,6 +285,10 @@ name: Antes & Depois UGC
 strategy_note: Selfie de espelho. Deve parecer post real de brasileira no Instagram, nao TikTok americano.
 formats: ['9:16']
 recommended_format: 9:16
+market_tags: ['ugc', 'antes-depois', 'beleza', 'saude', 'instagram', 'native']
+use_case: Antes e depois estilo selfie de Instagram brasileiro. Máxima autenticidade e identificação.
+best_for: ['Beleza', 'Saúde', 'UGC', 'Instagram Stories']
+difficulty: Fácil
 variables:
   - key: PESSOA
     fill: ai_copy
@@ -292,6 +324,10 @@ name: Marketing Negativo / Isca
 strategy_note: Review falso-negativo que e rave. Card estilo Google Reviews / Mercado Livre (nao Amazon).
 formats: ['4:5', '1:1']
 recommended_format: 4:5
+market_tags: ['review', 'prova-social', 'curiosidade', 'scroll-stop', 'mercado-livre', 'ecommerce']
+use_case: Review que parece negativo mas é um elogio disfarçado. Scroll-stop garantido.
+best_for: ['E-commerce', 'Produto físico', 'Performance', 'Scroll-stop']
+difficulty: Médio
 variables:
   - key: PRODUTO
     fill: ai_copy
@@ -321,6 +357,10 @@ name: Imprensa / Editorial
 strategy_note: Autoridade. Energia Vogue Brasil. Logos de publicacoes brasileiras.
 formats: ['4:5', '1:1']
 recommended_format: 4:5
+market_tags: ['imprensa', 'editorial', 'branding', 'autoridade', 'luxo', 'beleza']
+use_case: Presença de marca com logos de imprensa brasileira. Energia Vogue Brasil.
+best_for: ['Luxo', 'Beleza premium', 'Branding', 'Autoridade de marca']
+difficulty: Médio
 variables:
   - key: COR DA MARCA
     fill: brand_dna
@@ -350,6 +390,10 @@ name: Card de Review com Citacao Emocional
 strategy_note: Citacao emocional + card de review truncado + "...Leia mais" cria open loop. Bandeira BR + "Comprador Verificado".
 formats: ['1:1', '4:5']
 recommended_format: 1:1
+market_tags: ['review', 'prova-social', 'depoimento', 'ecommerce', 'curiosidade', 'open-loop']
+use_case: Citação emocional em destaque + card de review truncado com "Leia mais". Cria open loop irresistível.
+best_for: ['Beleza', 'Saúde', 'E-commerce', 'Prova social']
+difficulty: Fácil
 variables:
   - key: COR DA MARCA com hex — tom suave funciona melhor
     fill: ai_copy
@@ -381,6 +425,10 @@ name: Lifestyle + Lineup de Cores
 strategy_note: Foto de acao lifestyle brasileira + produtos em leque. Cenarios: praia, futevolei, academia.
 formats: ['1:1', '4:5']
 recommended_format: 1:1
+market_tags: ['lifestyle', 'branding', 'moda', 'esporte', 'praia', 'variantes', 'produto-fisico']
+use_case: Foto de ação lifestyle brasileira com linha de cores do produto em destaque.
+best_for: ['Moda', 'Esporte', 'Bebidas', 'Produto com variantes de cor']
+difficulty: Médio
 variables:
   - key: DESCRICAO LIFESTYLE
     fill: ai_copy
@@ -420,6 +468,10 @@ name: Stats Radiais / Callout com Setas
 strategy_note: Produto no centro, stats orbitando. Setas tornam escaneavel em 2 segundos. Precos em reais.
 formats: ['1:1', '4:5']
 recommended_format: 1:1
+market_tags: ['stats', 'suplemento', 'saude', 'numeros', 'prova-social', 'educacional', 'preco']
+use_case: Produto central rodeado por 4 stats-chave com setas. Escaneável em 2 segundos.
+best_for: ['Suplementos', 'Alimentos funcionais', 'Saúde', 'Performance']
+difficulty: Médio
 variables:
   - key: COR GRADIENTE LEVE
     fill: brand_dna
@@ -465,6 +517,10 @@ name: Showcase de Kit + Barra de Beneficios
 strategy_note: Vende o sistema, nao o SKU. Caixa aberta como hero.
 formats: ['1:1', '4:5']
 recommended_format: 1:1
+market_tags: ['kit', 'beneficios', 'produto-fisico', 'ecommerce', 'beleza', 'suplemento', 'lifestyle']
+use_case: Vende o kit completo, não o SKU individual. Caixa aberta como hero. Barra de benefícios no topo.
+best_for: ['Kits e combos', 'Beleza', 'Academia', 'E-commerce']
+difficulty: Médio
 variables:
   - key: BACKGROUND
     fill: brand_dna
@@ -504,6 +560,10 @@ name: Print de Comentario do Instagram + Produto
 strategy_note: Screenshot de comentario do Instagram = credibilidade instantanea no Brasil. Deve parecer screenshot REAL.
 formats: ['1:1', '4:5']
 recommended_format: 1:1
+market_tags: ['instagram', 'native', 'ugc', 'prova-social', 'comentario', 'scroll-stop']
+use_case: Screenshot de comentário real do Instagram + produto embaixo. Credibilidade instantânea.
+best_for: ['Instagram', 'UGC', 'Beleza', 'Scroll-stop']
+difficulty: Fácil
 variables:
   - key: HOOK EM PORTUGUES
     fill: ai_copy
@@ -537,6 +597,10 @@ name: Curiosidade / Hook Quote Depoimento
 strategy_note: Headline provocativa forca double-take. Reveal recontextualiza. Scroll-stop machine.
 formats: ['1:1', '4:5']
 recommended_format: 1:1
+market_tags: ['curiosidade', 'hook', 'scroll-stop', 'depoimento', 'saude', 'beleza', 'performance']
+use_case: Headline provocativa que força double-take. Reveal recontextualiza o sentido. Scroll-stop machine.
+best_for: ['Saúde', 'Beleza', 'Suplementos', 'Performance']
+difficulty: Avançado
 variables:
   - key: COR ACCENT
     fill: brand_dna
@@ -578,6 +642,10 @@ name: Card de Review Verificado
 strategy_note: Simula UI de plataforma de review. Badge verificado + "Leia mais" = trust brasileiro.
 formats: ['1:1', '4:5']
 recommended_format: 1:1
+market_tags: ['review', 'prova-social', 'trust', 'depoimento', 'ecommerce', 'beleza', 'saude']
+use_case: Simula UI de plataforma de review com badge Comprador Verificado. Trust instantâneo.
+best_for: ['E-commerce', 'Beleza', 'Saúde', 'Produto com muitos reviews']
+difficulty: Fácil
 variables:
   - key: COR DA MARCA
     fill: brand_dna
@@ -607,6 +675,10 @@ name: Stats Radiais com Flatlay Lifestyle
 strategy_note: Stats radiais + flatlay lifestyle e produto na mao. Labels em portugues.
 formats: ['1:1']
 recommended_format: 1:1
+market_tags: ['stats', 'lifestyle', 'flatlay', 'suplemento', 'saude', 'alimento', 'numeros']
+use_case: Flatlay apetitoso com stats radiais apontando para o produto. Informação densa e escaneável.
+best_for: ['Alimentos funcionais', 'Suplementos', 'Café da manhã', 'Saúde']
+difficulty: Médio
 variables:
   - key: COR ACCENT
     fill: brand_dna
@@ -646,6 +718,10 @@ name: Depoimento Destacado / Anotado
 strategy_note: Marca-texto faz o trabalho. Frases-chave em destaque visual. Nome + verificado.
 formats: ['1:1', '4:5']
 recommended_format: 1:1
+market_tags: ['depoimento', 'prova-social', 'destaque', 'trust', 'saude', 'beleza', 'garantia']
+use_case: Depoimento longo com frases-chave marcadas com marcador de texto + garantia em destaque.
+best_for: ['Saúde', 'Beleza', 'Infoproduto', 'Alto ticket']
+difficulty: Médio
 variables:
   - key: DESCRICAO DA PESSOA
     fill: ai_copy
@@ -685,6 +761,10 @@ name: Advertorial / Conteudo Editorial
 strategy_note: Parece post de portal, nao anuncio. Usar estilo UOL / Buzzfeed Brasil.
 formats: ['4:5', '9:16']
 recommended_format: 4:5
+market_tags: ['advertorial', 'native', 'editorial', 'viral', 'instagram', 'uol', 'buzzfeed']
+use_case: Parece post de portal de notícias, não anúncio. Energia Buzzfeed Brasil / UOL.
+best_for: ['Infoproduto', 'Curso online', 'Viral', 'Conteúdo nativo']
+difficulty: Avançado
 variables:
   - key: DESCRICAO DA PESSOA
     fill: ai_copy

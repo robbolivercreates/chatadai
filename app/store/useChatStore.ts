@@ -121,7 +121,13 @@ export const useChatStore = create<ChatStore>()(
       storage: {
         getItem: (name) => {
           const raw = localStorage.getItem(name);
-          return raw ? JSON.parse(raw) : null;
+          if (!raw) return null;
+          const parsed = JSON.parse(raw);
+          // Always start on the welcome screen — clear activeChatId on load
+          if (parsed?.state) {
+            parsed.state.activeChatId = null;
+          }
+          return parsed;
         },
         setItem: (name, value) => {
           try {
